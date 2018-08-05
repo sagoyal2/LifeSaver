@@ -9,9 +9,9 @@ import webapp2
 
 class MainHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/plain''
+        self.response.headers['Content-Type'] = 'text/plain'
         return self.response.write("TEST")
 
 app = webapp2.WSGIApplication([
-    ('/, MainHandler)
+    ('/', MainHandler)
 ], debug=True)
