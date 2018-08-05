@@ -1,0 +1,54 @@
+.header {
+	height: 100px;
+	width: 100%;
+	background-color: #000000;
+	position: fixed; 
+	top: 0; 
+	left: 0;
+}
+p.header {
+	color: #FFFFFF;
+	text-align: center;
+	font-size: 40px;
+	font-weight: bold;
+	
+}
+div.report {
+	height: 200px;
+	background-color: #C43232;
+	width: auto;
+	padding: 10px;
+	margin: 100px;
+	margin-top: 200px;
+	border-radius: 50px;
+	box-shadow: 10px 10px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+}
+a.report {
+	font-weight: bold;
+	font-size: 36px;
+	text-align: center;
+	color: #000000;
+
+}
+div.register {
+	height: 200px;
+	background-color: #C43232;
+	width: auto;
+	padding: 10px;
+	margin: 100px;
+	border-radius: 50px; 
+	box-shadow: 10px 10px;
+	justify-content: center;
+	display: flex;
+	align-items: center;
+}
+a.register {
+	font-weight: bold;
+	font-size: 36px;
+	text-align: center;
+	color: #000000;
+
+}
