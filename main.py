@@ -10,7 +10,7 @@ jinja_env = jinja2.Environment(
 class MainHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('app.html')
+        template = jinja_env.get_template('static/app.html')
         return self.response.write(template.render())
 
 app = webapp2.WSGIApplication([
