@@ -13,5 +13,5 @@ class MainHandler(webapp2.RequestHandler):
         return self.response.write("TEST")
 
 app = webapp2.WSGIApplication([
-    ('/, MainHandler)
+    ('/', MainHandler)
 ], debug=True)
