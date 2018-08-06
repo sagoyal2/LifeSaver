@@ -19,10 +19,16 @@ class RegisterHandler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/plain'
         self.response.write("Needs subscribe page")
 
-class ReportHandler(webapp2.RequestHandler):
+class RHFHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('static/rhf.html')
+        self.response.write(template.render())
+
+class ReportHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('web-dicatphone-gh-pages/index.html')
         self.response.write(template.render())
 
 class CreatorsHandler(webapp2.RequestHandler):
@@ -48,6 +54,7 @@ class TestHandler(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/register', RegisterHandler),
+    ('/RHF', RHFHandler),
     ('/report', ReportHandler),
     ('/creators', CreatorsHandler),
     ('/aboutUs', AboutUsHandler),
