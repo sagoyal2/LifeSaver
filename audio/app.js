@@ -9,8 +9,8 @@ var mainSection = document.querySelector('.main-controls');
 
 var blobContents;
 
-// var uploadButton = document.querySelector('#uploadButton');
-// uploadButton.onclick = function() {
+// var submitButton = document.querySelector('#submitButton');
+// submitButton.onclick = function() {
 
 function uploadAudio(){
   var HTML_apiKey = document.querySelector('#firebase_apiKey');
@@ -71,9 +71,9 @@ function uploadAudio(){
   var file = blobContents // use the Blob or File API
   messageAudioRef.put(file).then(function(snapshot) {
     console.log('Uploaded a blob or file!');
-    console.log("BEFORE JQUERY POST")
-    $.post("/report")
-    console.log("AFTER JQUERY POST")
+    // console.log("BEFORE JQUERY POST")
+    // $.post("/report")
+    // console.log("AFTER JQUERY POST")
   });
 
 }
@@ -121,9 +121,6 @@ if (navigator.mediaDevices.getUserMedia) {
 
       stop.disabled = true;
       record.disabled = false;
-
-
-      uploadAudio();
     }
 
     mediaRecorder.onstop = function(e) {
@@ -179,6 +176,8 @@ if (navigator.mediaDevices.getUserMedia) {
       //     clipLabel.textContent = newClipName;
       //   }
       // }
+
+      uploadAudio();
     }
 
     mediaRecorder.ondataavailable = function(e) {
