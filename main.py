@@ -1,6 +1,7 @@
 import webapp2
 import jinja2
 import os
+import ExtraMethods
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -36,10 +37,17 @@ class AboutUsHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('static/aboutUs.html')
         self.response.write(template.render())
 
+class TestHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        latitudeLongitude = [41.717713, -88.151134]
+        self.response.write(ExtraMethods.latLonToZIP(latitudeLongitude[0], latitudeLongitude[1]))
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/register', RegisterHandler),
     ('/report', ReportHandler),
     ('/creators', CreatorsHandler),
-    ('/aboutUs', AboutUsHandler)
-], debug=True)
+    ('/aboutUs', AboutUsHandler),
+    ('/test', TestHandler)
+    ], debug=True)
