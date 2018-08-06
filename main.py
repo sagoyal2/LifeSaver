@@ -29,7 +29,12 @@ class ReportHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('static/report.html')
-        self.response.write(template.render())
+
+        data = {
+            "firebase_script":Firebase.firebase_script
+        }
+
+        self.response.write(template.render(data))
 
     def post(self):
         url = self.request.get('url')
@@ -37,7 +42,8 @@ class ReportHandler(webapp2.RequestHandler):
 
         data = {
             "url":url,
-            "details":details
+            "details":details,
+            "firebase_script":Firebase.firebase_script
         }
 
         self.response.headers['Content-Type'] = 'text/html'
