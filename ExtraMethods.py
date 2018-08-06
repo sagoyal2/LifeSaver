@@ -2,8 +2,21 @@ import Keys
 import json
 from google.appengine.api import urlfetch
 
-# getNearbyZipCodes(ZIP code, distance)
-# ZIP Code API
+import urllib
+import urllib2
+
+#returns a list of zip codes within distance of ZIP
+#https://docs.python.org/2/howto/urllib2.html
+def getNearbyZipCodesJSON(ZIP, distance):
+    zip_url = "http://www.zipcodeapi.com/rest/%s/multi-radius.json/%s/mile" % (Keys.zip_key, str(distance))
+    post_fields = {'zip_codes': str(ZIP)}     # Set POST fields here
+    data = urllib.urlencode(post_fields)
+    req = urllib2.Request(zip_url, data)
+    response = urllib2.urlopen(req)
+    the_page = response.read()
+    jsonText = json.loads(the_page)
+    refined = jsonText["responses"][0]["zip_codes"]
+    return refined
 
 # SOURCE: https://www.makeuseof.com/tag/email-to-sms/
 # First is SMS, Second is MMS (use the first!)
@@ -50,3 +63,10 @@ def latLonToZIP(latitude, longitude):
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
     return str(response["results"][0]["address_components"][0]["short_name"])
+
+#https://developers.google.com/maps/documentation/geocoding/intro
+def latLonToAddress(latitude, longitude):
+    google_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&result_type=street_address&key=%s" % (str(latitude), str(longitude), Keys.google_key)
+    urlContent = urlfetch.fetch(google_url).content
+    response = json.loads(urlContent)
+    return str(response["results"][0]["formatted_address"])

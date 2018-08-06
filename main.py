@@ -40,8 +40,10 @@ class AboutUsHandler(webapp2.RequestHandler):
 class TestHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/plain'
-        latitudeLongitude = [41.717713, -88.151134]
-        self.response.write(ExtraMethods.latLonToZIP(latitudeLongitude[0], latitudeLongitude[1]))
+        # latitudeLongitude = [41.717713, -88.151134]
+        # # self.response.write(ExtraMethods.latLonToZIP(latitudeLongitude[0], latitudeLongitude[1]))
+        # self.response.write(ExtraMethods.latLonToAddress(latitudeLongitude[0], latitudeLongitude[1]))
+        self.response.write(ExtraMethods.getNearbyZipCodesJSON(60565, 3))
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
