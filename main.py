@@ -32,12 +32,12 @@ class ReportHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('static/report.html')
 
         data = {
-            firebase_apiKey = Keys.firebase_apiKey,
-            firebase_authDomain = Keys.firebase_authDomain,
-            firebase_databaseURL = Keys.firebase_databaseURL,
-            firebase_projectId = Keys.firebase_projectId,
-            firebase_storageBucket = Keys.firebase_storageBucket,
-            firebase_messagingSenderId = Keys.firebase_messagingSenderId
+            firebase_apiKey : Keys.firebase_apiKey,
+            firebase_authDomain : Keys.firebase_authDomain,
+            firebase_databaseURL : Keys.firebase_databaseURL,
+            firebase_projectId : Keys.firebase_projectId,
+            firebase_storageBucket : Keys.firebase_storageBucket,
+            firebase_messagingSenderId : Keys.firebase_messagingSenderId
         }
 
         self.response.write(template.render(data))
@@ -49,12 +49,12 @@ class ReportHandler(webapp2.RequestHandler):
         data = {
             "url":url,
             "details":details,
-            firebase_apiKey = Keys.firebase_apiKey,
-            firebase_authDomain = Keys.firebase_authDomain,
-            firebase_databaseURL = Keys.firebase_databaseURL,
-            firebase_projectId = Keys.firebase_projectId,
-            firebase_storageBucket = Keys.firebase_storageBucket,
-            firebase_messagingSenderId = Keys.firebase_messagingSenderId
+            firebase_apiKey : Keys.firebase_apiKey,
+            firebase_authDomain : Keys.firebase_authDomain,
+            firebase_databaseURL : Keys.firebase_databaseURL,
+            firebase_projectId : Keys.firebase_projectId,
+            firebase_storageBucket : Keys.firebase_storageBucket,
+            firebase_messagingSenderId : Keys.firebase_messagingSenderId
         }
 
         self.response.headers['Content-Type'] = 'text/html'
