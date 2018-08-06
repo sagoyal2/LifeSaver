@@ -87,13 +87,15 @@ if (navigator.mediaDevices.getUserMedia) {
       soundClips.appendChild(clipContainer);
 
       audio.controls = true;
-      var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      //var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      var blob = new Blob(chunks, { 'type' : 'audio/wav; codecs=opus' }); //THIS SHOULD DO THE TRICK FOR WAV
+
       blobContents = blob;
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
       console.log("recorder stopped");
-      hiddenInputURL.value = audioURL;
+      //hiddenInputURL.value = audioURL;
       console.log(audioURL);
 
       // deleteButton.onclick = function(e) {
