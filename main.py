@@ -3,6 +3,7 @@ import jinja2
 import os
 import ExtraMethods
 import Keys
+import logging
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -43,12 +44,20 @@ class ReportHandler(webapp2.RequestHandler):
         self.response.write(template.render(data))
 
     def post(self):
-        url = self.request.get('url')
+        logging.info("POST METHOD WAS CALLED")
+
+        # url = self.request.get('#url')
         details = self.request.get('details')
         fileName = self.request.get('fileNameInput')
         filePath = self.request.get('filePathInput')
 
+        logging.info("FILE NAME: " + fileName)
+        logging.info("FILE PATH: " + filePath)
+        logging.info("DETAILS: " + details)
+
         #DOES SOMETHING WITH EMAIL HERE !!!
+        logging.info("EMAIL SENT")
+
 
         data = {
             # "url":url,
@@ -65,6 +74,9 @@ class ReportHandler(webapp2.RequestHandler):
 
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('static/report_test.html')
+
+        logging.info("NEW PAGE IS ABOUT TO RENDER")
+
         self.response.write(template.render(data))
 
 class CreatorsHandler(webapp2.RequestHandler):

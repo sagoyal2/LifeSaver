@@ -9,9 +9,10 @@ var mainSection = document.querySelector('.main-controls');
 
 var blobContents;
 
-var uploadButton = document.querySelector('#uploadButton');
-uploadButton.onclick = function() {
+// var uploadButton = document.querySelector('#uploadButton');
+// uploadButton.onclick = function() {
 
+function uploadAudio(){
   var HTML_apiKey = document.querySelector('#firebase_apiKey');
   var HTML_authDomain = document.querySelector('#firebase_authDomain');
   var HTML_databaseURL = document.querySelector('#firebase_databaseURL');
@@ -41,12 +42,14 @@ uploadButton.onclick = function() {
   var fileName = 'message' + Date.now() + '.ogg';
   console.log(fileName);
   var fileNameInput = document.querySelector('#fileNameInput');
-  fileNameInput.innerHTML = "Video Name: " + fileName;
+  // fileNameInput.innerHTML = "Video Name: " + fileName;
+  fileNameInput.value = fileName;
 
   var filePath = 'audio/' + fileName;
   console.log(filePath);
   var filePathInput = document.querySelector('#filePathInput');
-  filePathInput.innerHTML = "Video Path: " + filePath;
+  // filePathInput.innerHTML = "Video Path: " + filePath;
+  filePathInput.value = filePath;
 
   // Create a reference to 'mountains.jpg'
   var messageRef = storageRef.child(fileName);
@@ -68,9 +71,11 @@ uploadButton.onclick = function() {
   var file = blobContents // use the Blob or File API
   messageAudioRef.put(file).then(function(snapshot) {
     console.log('Uploaded a blob or file!');
+    console.log("BEFORE JQUERY POST")
+    $.post("/report")
+    console.log("AFTER JQUERY POST")
   });
 
-  jQuery.post("/report")
 }
 
 
@@ -116,6 +121,9 @@ if (navigator.mediaDevices.getUserMedia) {
 
       stop.disabled = true;
       record.disabled = false;
+
+
+      uploadAudio();
     }
 
     mediaRecorder.onstop = function(e) {

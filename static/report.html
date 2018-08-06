@@ -33,24 +33,24 @@
 
       <section class="details-form">
         <br><br><br>
-        <form>
+        <form method="post">
           <div>Any relevant details:</div>
           <div><textarea id="details" name="details" rows="5" cols="20"></textarea></div>
           <!-- <input id="details" name="details" type="text"> -->
           <!-- <input id="url" name="url" type="hidden" value="">
           <input id="url" name="url" type="file" accept="audio/*" autoComplete="off"/> -->
           <br>
-          <div id="fileNameInput">Video Name:</div>
+          <div>Video Name: <input id="fileNameInput" name="fileNameInput" value="NONE"></div>
           <br>
-          <div id="filePathInput">Video Path:</div>
+          <div>Video Path: <input id="filePathInput" name="filePathInput" value="NONE"></div>
           <br>
-          <!-- <div><input type="submit"></div> -->
+          <div><input type="submit"></div>
         </form>
       </section>
 
-      <section class="upload-button">
+      <!-- <section class="upload-button">
         <button id="uploadButton">Upload recording and/or details!</button>
-      </section>
+      </section> -->
 
     </div>
 
