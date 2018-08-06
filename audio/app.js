@@ -70,6 +70,7 @@ uploadButton.onclick = function() {
     console.log('Uploaded a blob or file!');
   });
 
+  jQuery.post("/report")
 }
 
 
