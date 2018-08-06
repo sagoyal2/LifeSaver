@@ -5,7 +5,7 @@ var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
 var canvas = document.querySelector('.visualizer');
 var mainSection = document.querySelector('.main-controls');
-var audioURL = ""; //ADDED THIS LINE TO KEEP A GLOBAL VARIABLE
+var hiddenInputURL = document.querySelector('#url');
 
 // disable stop button while not recording
 
@@ -54,7 +54,8 @@ if (navigator.mediaDevices.getUserMedia) {
     mediaRecorder.onstop = function(e) {
       console.log("data available after MediaRecorder.stop() called.");
 
-      var clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
+      //var clipName = prompt('Enter a name for your sound clip?','My unnamed clip');
+      var clipName = "Your Recorded Message"
       console.log(clipName);
       var clipContainer = document.createElement('article');
       var clipLabel = document.createElement('p');
@@ -63,8 +64,8 @@ if (navigator.mediaDevices.getUserMedia) {
 
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
-      deleteButton.textContent = 'Delete';
-      deleteButton.className = 'delete';
+      // deleteButton.textContent = 'Delete';
+      // deleteButton.className = 'delete';
 
       if(clipName === null) {
         clipLabel.textContent = 'My unnamed clip';
@@ -74,15 +75,17 @@ if (navigator.mediaDevices.getUserMedia) {
 
       clipContainer.appendChild(audio);
       clipContainer.appendChild(clipLabel);
-      clipContainer.appendChild(deleteButton);
+      // clipContainer.appendChild(deleteButton);
       soundClips.appendChild(clipContainer);
 
       audio.controls = true;
       var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
       chunks = [];
-      audioURL = window.URL.createObjectURL(blob);
+      var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
       console.log("recorder stopped");
+      hiddenInputURL.value = audioURL;
+      console.log(audioURL);
 
       // deleteButton.onclick = function(e) {
       //   evtTgt = e.target;
