@@ -7,7 +7,7 @@ handlers:
   static_dir: static
   application_readable: True
 - url: /web-dictaphone-gh-pages.*
-  static_dir: static
+  static_dir: web-dictaphone-gh-pages
   application_readable: True
 - url: /.*
   script: main.app
