@@ -16,10 +16,12 @@ p.header {
 	
 }*/
 
+
 .header {
   overflow: hidden;
-  background-color: #f1f1f1;
+  background-color: rgba(92, 97, 108, 0.1);
   padding: 20px 10px;
+  border-radius: 10px;
 }
 
 .header a {

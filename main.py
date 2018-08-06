@@ -18,8 +18,9 @@ class MainHandler(webapp2.RequestHandler):
 
 class RegisterHandler(webapp2.RequestHandler):
     def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        self.response.write("Needs subscribe page")
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('static/register.html')
+        self.response.write(template.render())
 
 class RHFHandler(webapp2.RequestHandler):
     def get(self):
