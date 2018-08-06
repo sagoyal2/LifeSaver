@@ -8,6 +8,7 @@ handlers:
   application_readable: True
 - url: /audio.*
   static_dir: audio
+  application_readable: True
 - url: /.*
   script: main.app
 

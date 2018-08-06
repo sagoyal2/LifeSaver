@@ -28,7 +28,7 @@ class RHFHandler(webapp2.RequestHandler):
 class ReportHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('audio/index.html')
+        template = jinja_env.get_template('static/report.html')
         self.response.write(template.render())
 
 class CreatorsHandler(webapp2.RequestHandler):
