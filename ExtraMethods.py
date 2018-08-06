@@ -1,6 +1,6 @@
 import Keys
 import json
-import urlfetch
+from google.appengine.api import urlfetch
 
 # getNearbyZipCodes(ZIP code, distance)
 # ZIP Code API
