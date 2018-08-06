@@ -6,6 +6,11 @@
     <title>Web dictaphone</title>
     <link href="/audio/app.css" rel="stylesheet" type="text/css">
     <link href="/audio/install-button.css" rel="stylesheet" type="text/css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js">
+    //advice from console to use ^^^ instead of "https://www.gstatic.com/firebasejs/5.3.1/firebase.js"
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   </head>
   <body>
 
@@ -26,18 +31,35 @@
       <section class="sound-clips">
       </section>
 
-      <section class="input-form">
+      <section class="details-form">
         <br><br><br>
         <form method="post">
           <div>Any relevant details:</div>
           <div><textarea id="details" name="details" rows="5" cols="20"></textarea></div>
           <!-- <input id="details" name="details" type="text"> -->
-          <input id="url" name="url" type="hidden" value="">
-          <div><input type="submit"></div>
+          <!-- <input id="url" name="url" type="hidden" value="">
+          <input id="url" name="url" type="file" accept="audio/*" autoComplete="off"/> -->
+          <br>
+          <div>Video Name: <input id="fileNameInput" name="fileNameInput" value="NONE"></div>
+          <br>
+          <div>Video Path: <input id="filePathInput" name="filePathInput" value="NONE"></div>
+          <br>
+          <div><input id="submitButton" type="submit"></div>
         </form>
       </section>
 
+      <!-- <section class="upload-button">
+        <button id="uploadButton">Upload recording and/or details!</button>
+      </section> -->
+
     </div>
+
+    <input id="firebase_apiKey" type="hidden" value={{firebase_apiKey}}>
+    <input id="firebase_authDomain" type="hidden" value={{firebase_authDomain}}>
+    <input id="firebase_databaseURL" type="hidden" value={{firebase_databaseURL}}>
+    <input id="firebase_projectId" type="hidden" value={{firebase_projectId}}>
+    <input id="firebase_storageBucket" type="hidden" value={{firebase_storageBucket}}>
+    <input id="firebase_messagingSenderId" type="hidden" value={{firebase_messagingSenderId}}>
 
     <!-- <label for="toggle">❔</label>
     <input type="checkbox" id="toggle"> -->
@@ -51,7 +73,6 @@
       <button id="install-btn">Install app</button>
     </aside> -->
 
-
     <script src="/audio/install.js"></script>
 
     <script src="/audio/mediaDevices-getUserMedia-polyfill.js"></script>
@@ -61,3 +82,5 @@
 
   </body>
 </html>
+
+<!-->

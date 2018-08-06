@@ -2,6 +2,8 @@ import webapp2
 import jinja2
 import os
 import ExtraMethods
+import Keys
+import logging
 
 jinja_env = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -29,19 +31,52 @@ class ReportHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('static/report.html')
-        self.response.write(template.render())
-
-    def post(self):
-        url = self.request.get('url')
-        details = self.request.get('details')
 
         data = {
-            "url":url,
-            "details":details
+            "firebase_apiKey" : Keys.firebase_apiKey,
+            "firebase_authDomain" : Keys.firebase_authDomain,
+            "firebase_databaseURL" : Keys.firebase_databaseURL,
+            "firebase_projectId" : Keys.firebase_projectId,
+            "firebase_storageBucket" : Keys.firebase_storageBucket,
+            "firebase_messagingSenderId" : Keys.firebase_messagingSenderId
+        }
+
+        self.response.write(template.render(data))
+
+    def post(self):
+        logging.info("POST METHOD WAS CALLED")
+
+        # url = self.request.get('#url')
+        details = self.request.get('details')
+        fileName = self.request.get('fileNameInput')
+        filePath = self.request.get('filePathInput')
+
+        logging.info("FILE NAME: " + fileName)
+        logging.info("FILE PATH: " + filePath)
+        logging.info("DETAILS: " + details)
+
+        #DOES SOMETHING WITH EMAIL HERE !!!
+        logging.info("EMAIL SENT")
+
+
+        data = {
+            # "url":url,
+            "fileName":fileName,
+            "filePath":filePath,
+            "details":details,
+            # firebase_apiKey : Keys.firebase_apiKey,
+            # firebase_authDomain : Keys.firebase_authDomain,
+            # firebase_databaseURL : Keys.firebase_databaseURL,
+            # firebase_projectId : Keys.firebase_projectId,
+            # firebase_storageBucket : Keys.firebase_storageBucket,
+            # firebase_messagingSenderId : Keys.firebase_messagingSenderId
         }
 
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('static/report_test.html')
+
+        logging.info("NEW PAGE IS ABOUT TO RENDER")
+
         self.response.write(template.render(data))
 
 class CreatorsHandler(webapp2.RequestHandler):

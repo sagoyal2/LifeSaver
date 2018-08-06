@@ -5,7 +5,79 @@ var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
 var canvas = document.querySelector('.visualizer');
 var mainSection = document.querySelector('.main-controls');
-var hiddenInputURL = document.querySelector('#url');
+// var hiddenInputURL = document.querySelector('#url');
+
+var blobContents;
+
+// var submitButton = document.querySelector('#submitButton');
+// submitButton.onclick = function() {
+
+function uploadAudio(){
+  var HTML_apiKey = document.querySelector('#firebase_apiKey');
+  var HTML_authDomain = document.querySelector('#firebase_authDomain');
+  var HTML_databaseURL = document.querySelector('#firebase_databaseURL');
+  var HTML_projectId = document.querySelector('#firebase_projectId');
+  var HTML_storageBucket = document.querySelector('#firebase_storageBucket');
+  var HTML_messagingSenderId = document.querySelector('#firebase_messagingSenderId');
+
+  // Initialize Firebase
+  var config = {
+    apiKey: HTML_apiKey.value,
+    authDomain: HTML_authDomain.value,
+    databaseURL: HTML_databaseURL.value,
+    projectId: HTML_projectId.value,
+    storageBucket: HTML_storageBucket.value,
+    messagingSenderId: HTML_messagingSenderId.value
+  };
+  firebase.initializeApp(config);
+
+  console.log("initialized app!")
+
+  // Get a reference to the storage service, which is used to create references in your storage bucket
+  var storage = firebase.storage();
+
+  // Create a root reference
+  var storageRef = firebase.storage().ref();
+
+  var fileName = 'message' + Date.now() + '.ogg';
+  console.log(fileName);
+  var fileNameInput = document.querySelector('#fileNameInput');
+  // fileNameInput.innerHTML = "Video Name: " + fileName;
+  fileNameInput.value = fileName;
+
+  var filePath = 'audio/' + fileName;
+  console.log(filePath);
+  var filePathInput = document.querySelector('#filePathInput');
+  // filePathInput.innerHTML = "Video Path: " + filePath;
+  filePathInput.value = filePath;
+
+  // Create a reference to 'mountains.jpg'
+  var messageRef = storageRef.child(fileName);
+
+  // Create a reference to 'images/mountains.jpg'
+  var messageAudioRef = storageRef.child(filePath);
+
+  // // While the file names are the same, the references point to different files
+  // mountainsRef.name === mountainImagesRef.name            // true
+  // mountainsRef.fullPath === mountainImagesRef.fullPath    // false
+
+  console.log(blobContents)
+
+  //THESE RESOURCES USED
+  //https://firebase.google.com/docs/storage/web/start
+  //https://firebase.google.com/docs/storage/web/create-reference
+  //https://firebase.google.com/docs/storage/web/upload-files
+
+  var file = blobContents // use the Blob or File API
+  messageAudioRef.put(file).then(function(snapshot) {
+    console.log('Uploaded a blob or file!');
+    // console.log("BEFORE JQUERY POST")
+    // $.post("/report")
+    // console.log("AFTER JQUERY POST")
+  });
+
+}
+
 
 // disable stop button while not recording
 
@@ -80,11 +152,14 @@ if (navigator.mediaDevices.getUserMedia) {
 
       audio.controls = true;
       var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      //var blob = new Blob(chunks, { 'type' : 'audio/wav; codecs=opus' }); //THIS SHOULD DO THE TRICK FOR WAV
+
+      blobContents = blob;
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
       console.log("recorder stopped");
-      hiddenInputURL.value = audioURL;
+      //hiddenInputURL.value = audioURL;
       console.log(audioURL);
 
       // deleteButton.onclick = function(e) {
@@ -101,6 +176,8 @@ if (navigator.mediaDevices.getUserMedia) {
       //     clipLabel.textContent = newClipName;
       //   }
       // }
+
+      uploadAudio();
     }
 
     mediaRecorder.ondataavailable = function(e) {
