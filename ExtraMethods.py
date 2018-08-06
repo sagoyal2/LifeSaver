@@ -54,7 +54,6 @@ def latLonToZIP(latitude, longitude):
 #https://developers.google.com/maps/documentation/geocoding/intro
 def latLonToAddress(latitude, longitude):
     google_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&result_type=street_address&key=%s" % (str(latitude), str(longitude), Keys.google_key)
-    # urlContent = urlfetch.fetch(google_url).content
-    # response = json.loads(urlContent)
-    # return str(response["results"][0]["address_components"][0]["short_name"])
-    return google_url
+    urlContent = urlfetch.fetch(google_url).content
+    response = json.loads(urlContent)
+    return str(response["results"][0]["formatted_address"])
