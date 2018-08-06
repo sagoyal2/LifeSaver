@@ -38,11 +38,21 @@ uploadButton.onclick = function() {
   // Create a root reference
   var storageRef = firebase.storage().ref();
 
+  var fileName = 'message' + Date.now() + '.ogg';
+  console.log(fileName);
+  var fileNameInput = document.querySelector('#fileNameInput');
+  fileNameInput.innerHTML = "Video Name: " + fileName;
+
+  var filePath = 'audio/' + fileName;
+  console.log(filePath);
+  var filePathInput = document.querySelector('#filePathInput');
+  filePathInput.innerHTML = "Video Path: " + filePath;
+
   // Create a reference to 'mountains.jpg'
-  var messageRef = storageRef.child('message.ogg');
+  var messageRef = storageRef.child(fileName);
 
   // Create a reference to 'images/mountains.jpg'
-  var messageAudioRef = storageRef.child('audio/message.ogg');
+  var messageAudioRef = storageRef.child(filePath);
 
   // // While the file names are the same, the references point to different files
   // mountainsRef.name === mountainImagesRef.name            // true
