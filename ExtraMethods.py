@@ -49,4 +49,4 @@ def latLonToZIP(latitude, longitude):
     google_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&result_type=postal_code&key=%s" % (str(latitude), str(longitude), Keys.google_key)
     urlContent = urlfetch.fetch(google_url).content
     response = json.loads(urlContent)
-    return response["results"][0]["address_components"][0]["short_name"]
+    return str(response["results"][0]["address_components"][0]["short_name"])
