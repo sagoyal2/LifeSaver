@@ -9,14 +9,14 @@ import urllib2
 #https://docs.python.org/2/howto/urllib2.html
 def getNearbyZipCodesJSON(ZIP, distance):
     zip_url = "http://www.zipcodeapi.com/rest/%s/multi-radius.json/%s/mile" % (Keys.zip_key, str(distance))
-    logging.info(zip_url)
     post_fields = {'zip_codes': str(ZIP)}     # Set POST fields here
     data = urllib.urlencode(post_fields)
     req = urllib2.Request(zip_url, data)
     response = urllib2.urlopen(req)
     the_page = response.read()
     jsonText = json.loads(the_page)
-    return jsonText["responses"][0]["zip_codes"]
+    refined = jsonText["responses"][0]["zip_codes"]
+    return refined
 
 # SOURCE: https://www.makeuseof.com/tag/email-to-sms/
 # First is SMS, Second is MMS (use the first!)
