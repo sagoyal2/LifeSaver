@@ -55,7 +55,25 @@
       <button id="install-btn">Install app</button>
     </aside> -->
 
-    {{firebase_script}}
+    <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: {{firebase_apiKey}},
+        authDomain: {{firebase_authDomain}},
+        databaseURL: {{firebase_databaseURL}},
+        projectId: {{firebase_projectId}},
+        storageBucket: {{firebase_storageBucket}},
+        messagingSenderId: {{firebase_messagingSenderId}}
+      };
+      firebase.initializeApp(config);
+
+      // Get a reference to the storage service, which is used to create references in your storage bucket
+      var storage = firebase.storage();
+
+      // Create a storage reference from our storage service
+      var storageRef = storage.ref();
+    </script>
 
     <script src="/audio/install.js"></script>
 
