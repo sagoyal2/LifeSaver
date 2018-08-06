@@ -29,12 +29,24 @@ uploadButton.onclick = function() {
     messagingSenderId: HTML_messagingSenderId.value
   };
   firebase.initializeApp(config);
+
   console.log("initialized app!")
+
   // Get a reference to the storage service, which is used to create references in your storage bucket
   var storage = firebase.storage();
 
-  // Create a storage reference from our storage service
-  var storageRef = storage.ref();
+  // Create a root reference
+  var storageRef = firebase.storage().ref();
+
+  // Create a reference to 'mountains.jpg'
+  var messageRef = storageRef.child('message.ogg');
+
+  // Create a reference to 'images/mountains.jpg'
+  var messageAudioRef = storageRef.child('audio/message.ogg');
+
+  // // While the file names are the same, the references point to different files
+  // mountainsRef.name === mountainImagesRef.name            // true
+  // mountainsRef.fullPath === mountainImagesRef.fullPath    // false
 
   console.log(blobContents)
 
@@ -42,8 +54,9 @@ uploadButton.onclick = function() {
   //https://firebase.google.com/docs/storage/web/start
   //https://firebase.google.com/docs/storage/web/create-reference
   //https://firebase.google.com/docs/storage/web/upload-files
+
   var file = blobContents // use the Blob or File API
-  storageRef.put(file).then(function(snapshot) {
+  messageAudioRef.put(file).then(function(snapshot) {
     console.log('Uploaded a blob or file!');
   });
 
@@ -122,8 +135,8 @@ if (navigator.mediaDevices.getUserMedia) {
       soundClips.appendChild(clipContainer);
 
       audio.controls = true;
-      //var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
-      var blob = new Blob(chunks, { 'type' : 'audio/wav; codecs=opus' }); //THIS SHOULD DO THE TRICK FOR WAV
+      var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      //var blob = new Blob(chunks, { 'type' : 'audio/wav; codecs=opus' }); //THIS SHOULD DO THE TRICK FOR WAV
 
       blobContents = blob;
       chunks = [];
