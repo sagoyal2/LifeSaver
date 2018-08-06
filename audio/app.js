@@ -5,7 +5,15 @@ var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
 var canvas = document.querySelector('.visualizer');
 var mainSection = document.querySelector('.main-controls');
-var hiddenInputURL = document.querySelector('#url');
+// var hiddenInputURL = document.querySelector('#url');
+
+var blobContents;
+
+var uploadButton = document.querySelector('#uploadButton');
+uploadButton.onclick = function() {
+  console.log(blobContents)
+}
+
 
 // disable stop button while not recording
 
@@ -80,6 +88,7 @@ if (navigator.mediaDevices.getUserMedia) {
 
       audio.controls = true;
       var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
+      blobContents = blob;
       chunks = [];
       var audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
