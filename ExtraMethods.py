@@ -46,7 +46,7 @@ def getPhoneNumberEmail(phoneNumber, phoneCarrier):
 
 #https://developers.google.com/maps/documentation/geocoding/intro
 def latLonToZIP(latitude, longitude):
-    google_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&result_type=postal_code&key=%s" % (latitude, longitude, Keys.google_key)
+    google_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&result_type=postal_code&key=%s" % (str(latitude), str(longitude), Keys.google_key)
     # urlContent = urlfetch.fetch(google_url).content
     # response = json.loads(urlContent)
-    logging.info(google_url)
+    return google_url

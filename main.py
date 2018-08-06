@@ -24,8 +24,16 @@ class ReportHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('static/rhf.html')
         self.response.write(template.render())
 
+class RegisterHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/plain'
+        latitudeLongitude = [41.717713, -88.151134]
+        self.response.write(ExtraMethods.latLonToZIP(latitudeLongitude[0], latitudeLongitude[1]))
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/register', RegisterHandler),
-    ('/report', ReportHandler)
+    ('/report', ReportHandler),
+    ('/test', TestHandler)
 ], debug=True)
