@@ -12,6 +12,16 @@ var blobContents;
 var uploadButton = document.querySelector('#uploadButton');
 uploadButton.onclick = function() {
   console.log(blobContents)
+
+  //THESE RESOURCES USED
+  //https://firebase.google.com/docs/storage/web/start
+  //https://firebase.google.com/docs/storage/web/create-reference
+  //https://firebase.google.com/docs/storage/web/upload-files
+  var file = blobContents // use the Blob or File API
+  ref.put(file).then(function(snapshot) {
+    console.log('Uploaded a blob or file!');
+  });
+
 }
 
 
