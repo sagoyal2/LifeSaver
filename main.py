@@ -31,6 +31,19 @@ class ReportHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('static/report.html')
         self.response.write(template.render())
 
+    def post(self):
+        url = self.request.get('url')
+        details = self.request.get('details')
+
+        data = {
+            "url":url,
+            "details":details
+        }
+
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('static/report_test.html')
+        self.response.write(template.render(data))
+
 class CreatorsHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'

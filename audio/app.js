@@ -5,6 +5,7 @@ var stop = document.querySelector('.stop');
 var soundClips = document.querySelector('.sound-clips');
 var canvas = document.querySelector('.visualizer');
 var mainSection = document.querySelector('.main-controls');
+var audioURL = ""; //ADDED THIS LINE TO KEEP A GLOBAL VARIABLE
 
 // disable stop button while not recording
 
@@ -59,7 +60,7 @@ if (navigator.mediaDevices.getUserMedia) {
       var clipLabel = document.createElement('p');
       var audio = document.createElement('audio');
       var deleteButton = document.createElement('button');
-     
+
       clipContainer.classList.add('clip');
       audio.setAttribute('controls', '');
       deleteButton.textContent = 'Delete';
@@ -79,24 +80,24 @@ if (navigator.mediaDevices.getUserMedia) {
       audio.controls = true;
       var blob = new Blob(chunks, { 'type' : 'audio/ogg; codecs=opus' });
       chunks = [];
-      var audioURL = window.URL.createObjectURL(blob);
+      audioURL = window.URL.createObjectURL(blob);
       audio.src = audioURL;
       console.log("recorder stopped");
 
-      deleteButton.onclick = function(e) {
-        evtTgt = e.target;
-        evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
-      }
+      // deleteButton.onclick = function(e) {
+      //   evtTgt = e.target;
+      //   evtTgt.parentNode.parentNode.removeChild(evtTgt.parentNode);
+      // }
 
-      clipLabel.onclick = function() {
-        var existingName = clipLabel.textContent;
-        var newClipName = prompt('Enter a new name for your sound clip?');
-        if(newClipName === null) {
-          clipLabel.textContent = existingName;
-        } else {
-          clipLabel.textContent = newClipName;
-        }
-      }
+      // clipLabel.onclick = function() {
+      //   var existingName = clipLabel.textContent;
+      //   var newClipName = prompt('Enter a new name for your sound clip?');
+      //   if(newClipName === null) {
+      //     clipLabel.textContent = existingName;
+      //   } else {
+      //     clipLabel.textContent = newClipName;
+      //   }
+      // }
     }
 
     mediaRecorder.ondataavailable = function(e) {
@@ -148,7 +149,7 @@ function visualize(stream) {
 
 
     for(var i = 0; i < bufferLength; i++) {
- 
+
       var v = dataArray[i] / 128.0;
       var y = v * HEIGHT/2;
 

@@ -6,7 +6,7 @@ function install(ev) {
   // install the app
   var installLocFind = navigator.mozApps.install(manifest_url);
   installLocFind.onsuccess = function(data) {
-    // App is installed, do something 
+    // App is installed, do something
   };
   installLocFind.onerror = function() {
     // App wasn't installed, info is in
