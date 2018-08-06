@@ -2,8 +2,19 @@ import Keys
 import json
 from google.appengine.api import urlfetch
 
-# getNearbyZipCodes(ZIP code, distance)
-# ZIP Code API
+from urllib.parse import urlencode
+from urllib.request import Request, urlopen
+
+#returns a list of zip codes within distance of ZIP
+def getNearbyZipCodesJSON(ZIP, distance):
+    zip_url = "http://www.zipcodeapi.com/rest/%s/multi-radius.json/%s/mile" % (Keys.zip_key, distance)
+    logging.info(zip_url)
+    post_fields = {'zip_codes': ZIP}     # Set POST fields here
+    request = Request(url, urlencode(post_fields).encode())
+    json = urlopen(request).read().decode()
+    logging.info(json)
+    return json
+
 
 # SOURCE: https://www.makeuseof.com/tag/email-to-sms/
 # First is SMS, Second is MMS (use the first!)
