@@ -6,6 +6,10 @@
     <title>Web dictaphone</title>
     <link href="/audio/app.css" rel="stylesheet" type="text/css">
     <link href="/audio/install-button.css" rel="stylesheet" type="text/css">
+
+    <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js">
+    //advice from console to use ^^^ instead of "https://www.gstatic.com/firebasejs/5.3.1/firebase.js"
+    </script>
   </head>
   <body>
 
@@ -43,6 +47,13 @@
 
     </div>
 
+    <input id="firebase_apiKey" type="hidden" value={{firebase_apiKey}}>
+    <input id="firebase_authDomain" type="hidden" value={{firebase_authDomain}}>
+    <input id="firebase_databaseURL" type="hidden" value={{firebase_databaseURL}}>
+    <input id="firebase_projectId" type="hidden" value={{firebase_projectId}}>
+    <input id="firebase_storageBucket" type="hidden" value={{firebase_storageBucket}}>
+    <input id="firebase_messagingSenderId" type="hidden" value={{firebase_messagingSenderId}}>
+
     <!-- <label for="toggle">❔</label>
     <input type="checkbox" id="toggle"> -->
     <!-- <aside>
@@ -55,25 +66,6 @@
       <button id="install-btn">Install app</button>
     </aside> -->
 
-    <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
-    <script>
-      // Initialize Firebase
-      var config = {
-        apiKey: {{firebase_apiKey}},
-        authDomain: {{firebase_authDomain}},
-        databaseURL: {{firebase_databaseURL}},
-        projectId: {{firebase_projectId}},
-        storageBucket: {{firebase_storageBucket}},
-        messagingSenderId: {{firebase_messagingSenderId}}
-      };
-      firebase.initializeApp(config);
-
-      // Get a reference to the storage service, which is used to create references in your storage bucket
-      var storage = firebase.storage();
-
-      // Create a storage reference from our storage service
-      var storageRef = storage.ref();
-    </script>
 
     <script src="/audio/install.js"></script>
 

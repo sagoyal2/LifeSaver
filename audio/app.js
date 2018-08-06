@@ -11,6 +11,31 @@ var blobContents;
 
 var uploadButton = document.querySelector('#uploadButton');
 uploadButton.onclick = function() {
+
+  var HTML_apiKey = document.querySelector('#firebase_apiKey');
+  var HTML_authDomain = document.querySelector('#firebase_authDomain');
+  var HTML_databaseURL = document.querySelector('#firebase_databaseURL');
+  var HTML_projectId = document.querySelector('#firebase_projectId');
+  var HTML_storageBucket = document.querySelector('#firebase_storageBucket');
+  var HTML_messagingSenderId = document.querySelector('#firebase_messagingSenderId');
+
+  // Initialize Firebase
+  var config = {
+    apiKey: HTML_apiKey.value,
+    authDomain: HTML_authDomain.value,
+    databaseURL: HTML_databaseURL.value,
+    projectId: HTML_projectId.value,
+    storageBucket: HTML_storageBucket.value,
+    messagingSenderId: HTML_messagingSenderId.value
+  };
+  firebase.initializeApp(config);
+  console.log("initialized app!")
+  // Get a reference to the storage service, which is used to create references in your storage bucket
+  var storage = firebase.storage();
+
+  // Create a storage reference from our storage service
+  var storageRef = storage.ref();
+
   console.log(blobContents)
 
   //THESE RESOURCES USED
@@ -18,7 +43,7 @@ uploadButton.onclick = function() {
   //https://firebase.google.com/docs/storage/web/create-reference
   //https://firebase.google.com/docs/storage/web/upload-files
   var file = blobContents // use the Blob or File API
-  ref.put(file).then(function(snapshot) {
+  storageRef.put(file).then(function(snapshot) {
     console.log('Uploaded a blob or file!');
   });
 
