@@ -24,8 +24,22 @@ class ReportHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('static/rhf.html')
         self.response.write(template.render())
 
+class CreatorsHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('static/creators.html')
+        self.response.write(template.render())
+
+class AboutUsHandler(webapp2.RequestHandler):
+    def get(self):
+        self.response.headers['Content-Type'] = 'text/html'
+        template = jinja_env.get_template('static/aboutUs.html')
+        self.response.write(template.render())
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/register', RegisterHandler),
-    ('/report', ReportHandler)
+    ('/report', ReportHandler),
+    ('/creators', CreatorsHandler),
+    ('/aboutUs', AboutUsHandler)
 ], debug=True)
