@@ -7,9 +7,9 @@ from urllib.request import Request, urlopen
 
 #returns a list of zip codes within distance of ZIP
 def getNearbyZipCodesJSON(ZIP, distance):
-    zip_url = "http://www.zipcodeapi.com/rest/%s/multi-radius.json/%s/mile" % (Keys.zip_key, distance)
+    zip_url = "http://www.zipcodeapi.com/rest/%s/multi-radius.json/%s/mile" % (Keys.zip_key, str(distance))
     logging.info(zip_url)
-    post_fields = {'zip_codes': ZIP}     # Set POST fields here
+    post_fields = {'zip_codes': str(ZIP)}     # Set POST fields here
     request = Request(url, urlencode(post_fields).encode())
     json = urlopen(request).read().decode()
     logging.info(json)
