@@ -8,8 +8,9 @@ import urllib2
 #returns a list of zip codes within distance of ZIP
 #https://docs.python.org/2/howto/urllib2.html
 def getNearbyZipCodesJSON(ZIP, distance):
-    zip_url = "http://www.zipcodeapi.com/rest/%s/multi-radius.json/%s/mile" % (Keys.zip_key, str(distance))
-    post_fields = {'zip_codes': str(ZIP)}     # Set POST fields here
+    templateUrl = "http://www.zipcodeapi.com/rest/%s/multi-radius.json/%s/mile"
+    zip_url = templateUrl % (Keys.zip_key, str(distance))
+    post_fields = {'zip_codes': ZIP}     # Set POST fields here
     data = urllib.urlencode(post_fields)
     req = urllib2.Request(zip_url, data)
     response = urllib2.urlopen(req)
