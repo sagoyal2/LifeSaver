@@ -7,16 +7,14 @@ import urllib2
 
 #returns a list of zip codes within distance of ZIP
 #https://docs.python.org/2/howto/urllib2.html
-def getNearbyZipCodesJSON(ZIP, distance):
-    templateUrl = "http://www.zipcodeapi.com/rest/%s/multi-radius.json/%s/mile"
-    zip_url = templateUrl % (Keys.zip_key, str(distance))
-    post_fields = {'zip_codes': ZIP}     # Set POST fields here
-    data = urllib.urlencode(post_fields)
-    req = urllib2.Request(zip_url, data)
+def getNearbyZipCodesJSON(ZIP, distance): #NOTE that ZIP is string, distance is number
+    templateUrl = "http://www.zipcodeapi.com/rest/%s/radius.json/%s/%s/miles?minimal"
+    zip_url = templateUrl % (Keys.zip_key, ZIP, str(distance))
+    req = urllib2.Request(zip_url)
     response = urllib2.urlopen(req)
     the_page = response.read()
     jsonText = json.loads(the_page)
-    refined = jsonText["responses"][0]["zip_codes"]
+    refined = jsonText["zip_codes"]
     return refined
 
 # SOURCE: https://www.makeuseof.com/tag/email-to-sms/
