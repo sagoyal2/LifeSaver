@@ -9,6 +9,9 @@ handlers:
 - url: /audio.*
   static_dir: audio
   application_readable: True
+- url: /images.*
+  static_dir: images
+  application_readable: True
 - url: /.*
   script: main.app
 
