@@ -31,7 +31,7 @@ class RHFHandler(webapp2.RequestHandler):
 class ReportHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('static/report.html')
+        template = jinja_env.get_template('templates/report.html')
 
         data = {
             "firebase_apiKey" : Keys.firebase_apiKey,
@@ -74,7 +74,7 @@ class ReportHandler(webapp2.RequestHandler):
         }
 
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('static/report_test.html')
+        template = jinja_env.get_template('templates/report_test.html')
 
         logging.info("NEW PAGE IS ABOUT TO RENDER")
 
