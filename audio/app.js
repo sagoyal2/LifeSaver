@@ -67,6 +67,7 @@ function uploadAudio(){
   //https://firebase.google.com/docs/storage/web/start
   //https://firebase.google.com/docs/storage/web/create-reference
   //https://firebase.google.com/docs/storage/web/upload-files
+  //https://firebase.google.com/docs/storage/web/download-files
 
   var file = blobContents // use the Blob or File API
   messageAudioRef.put(file).then(function(snapshot) {
@@ -75,10 +76,25 @@ function uploadAudio(){
     // $.post("/report")
     // console.log("AFTER JQUERY POST")
 
-    var videoURL = messageAudioRef.getDownloadURL()
+    messageAudioRef.getDownloadURL().then(function(url) {
+      // `url` is the download URL for 'images/stars.jpg'
 
-    var fileURLInput = document.querySelector('#fileURLInput');
-    fileURLInput.value = videoURL;
+      // This can be downloaded directly:
+      var xhr = new XMLHttpRequest();
+      xhr.responseType = 'blob';
+      xhr.onload = function(event) {
+        var blob = xhr.response;
+      };
+      xhr.open('GET', url);
+      xhr.send();
+
+      var fileURLInput = document.querySelector('#fileURLInput');
+      fileURLInput.value = url;
+
+    }).catch(function(error) {
+      // Handle any errors
+    });
+
   });
 
   var x = "TEMP"
