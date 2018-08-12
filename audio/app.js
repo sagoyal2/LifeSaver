@@ -74,6 +74,11 @@ function uploadAudio(){
     // console.log("BEFORE JQUERY POST")
     // $.post("/report")
     // console.log("AFTER JQUERY POST")
+
+    var videoURL = messageAudioRef.getDownloadURL()
+
+    var fileURLInput = document.querySelector('#fileURLInput');
+    fileURLInput.value = videoURL;
   });
 
   var x = "TEMP"

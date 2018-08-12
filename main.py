@@ -25,7 +25,7 @@ class RegisterHandler(webapp2.RequestHandler):
         logging.info("POST METHOD WAS CALLED")
 
         # url = self.request.get('#url')
-        
+
         first_name = self.request.get('first_name')
         last_name = self.request.get('last_name')
         work_zipcode = self.request.get('work_zipcode')
@@ -51,15 +51,15 @@ class RegisterHandler(webapp2.RequestHandler):
             "phone_number" : phone_number,
             "phone_carrier" : phone_carrier
         }
-        
+
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/register_test.html')
 
         logging.info("NEW PAGE IS ABOUT TO RENDER")
 
         self.response.write(template.render(data))
-        
-        
+
+
         """
         self.response.headers['Content-Type'] = 'text/html'
         self.response.headers['Content-Type'] = 'text/html'
@@ -97,6 +97,7 @@ class ReportHandler(webapp2.RequestHandler):
         details = self.request.get('details')
         fileName = self.request.get('fileNameInput')
         filePath = self.request.get('filePathInput')
+        fileURL = self.request.get('fileURLInput')
 
         logging.info("FILE NAME: " + fileName)
         logging.info("FILE PATH: " + filePath)
@@ -110,6 +111,7 @@ class ReportHandler(webapp2.RequestHandler):
             # "url":url,
             "fileName":fileName,
             "filePath":filePath,
+            "fileURL":fileURL,
             "details":details,
             # firebase_apiKey : Keys.firebase_apiKey,
             # firebase_authDomain : Keys.firebase_authDomain,
@@ -119,19 +121,17 @@ class ReportHandler(webapp2.RequestHandler):
             # firebase_messagingSenderId : Keys.firebase_messagingSenderId
         }
 
-        """
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/report_test.html')
 
         logging.info("NEW PAGE IS ABOUT TO RENDER")
 
         self.response.write(template.render(data))
-        """
 
-        self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('static/rhf.html')
-        self.response.write(template.render())
-        
+        # self.response.headers['Content-Type'] = 'text/html'
+        # template = jinja_env.get_template('static/rhf.html')
+        # self.response.write(template.render())
+
 
 class CreatorsHandler(webapp2.RequestHandler):
     def get(self):
