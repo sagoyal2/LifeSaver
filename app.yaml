@@ -9,6 +9,7 @@ handlers:
 - url: /audio.*
   static_dir: audio
   application_readable: True
+# Doesn't need to be included (I think it's because HTML that needs rendering won't appear correctly)
 # - url: /templates.*
 #   static_dir: templates
 #   application_readable: True
