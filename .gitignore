@@ -1,2 +1,6 @@
 Keys.py
 *.pyc
+token.json
+credentials.json
+client_secret.json
+.DS_Store
