@@ -35,17 +35,20 @@
         <label for="last_name"><b>Last Name</b></label>
         <input name="last_name" type="text" placeholder="Doe" required>
 
+        <!-- I changed these to text since they shouldn't be read in as numbers due to the possible issue with 0ABCD-->
         <label for="work_zipcode"><b>Work Zip Code</b></label>
-        <input name="work_zipcode" type="Number" placeholder="12345" required>
+        <input name="work_zipcode" type="text" placeholder="12345" required>
 
         <label for="home_zipcode"><b>Home Zip Code</b></label>
-        <input name="home_zipcode" type="Number" placeholder="98765" required>
+        <input name="home_zipcode" type="text" placeholder="98765" required>
 
+        <!-- Also email and phone number shouldn't both be required, realistically one might want one or the other-->
+        <!-- It's ok for us to have the entry as required in the back-end, but doing so in the front-end limits flexibility-->
         <label for="email"><b>Email</b></label>
-        <input name="email" type="text" placeholder="Jane_Doe@email.com" required>
+        <input name="email" type="text" placeholder="Jane_Doe@email.com">
 
         <label for="phone_number"><b>Phone Number</b></label>
-        <input name="phone_number" type="text" placeholder="312-123-4567" required>
+        <input name="phone_number" type="text" placeholder="312-123-4567">
 
         <!--<button class="dropbtn">Dropdown</button>
           <div class="dropdown-content">
