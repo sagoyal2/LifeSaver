@@ -1,4 +1,4 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -6,12 +6,12 @@
 
 html, body {
   height: 100%;
-}
+} */
 
-body {
+/*body {
   font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   font-size: 0.8rem;
-}
+}*/
 
 .wrapper {
   height: 100%;
@@ -32,6 +32,7 @@ h1, h2 {
 
 canvas {
   display: block;
+  margin-top: 20px; 
   margin-bottom: 0.5rem;
 }
 
@@ -49,7 +50,8 @@ canvas {
 
 button {
   font-size: 1rem;
-  background: #0088cc;
+  /*background: #0088cc;*/
+  background: rgba(255, 148, 71,1);
   text-align: center;
   color: white;
   border: none;
@@ -59,7 +61,8 @@ button {
 
 button:hover, button:focus {
   box-shadow: inset 0px 0px 10px rgba(255, 255, 255, 1);
-  background: #0ae;
+  /*background: #0ae;*/
+  background: rgba(255, 88, 48,1);
 }
 
 button:active {
@@ -154,13 +157,20 @@ input[type=checkbox]:checked ~ aside {
   cursor: pointer;
 }
 
+
+
+
 /* Adjustments for wider screens */
-@media all and (min-width: 800px) {
-  /* Don't take all the space as readability is lost when line length
+
+/* Don't take all the space as readability is lost when line length
      goes past a certain size */
+
+/*
+@media all and (min-width: 800px) {
   .wrapper {
     width: 90%;
     max-width: 1000px;
     margin: 0 auto;
   }
-}
+} */
+

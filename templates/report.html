@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html lang="en-us">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title>Web dictaphone</title>
-    <link href="/audio/app.css" rel="stylesheet" type="text/css">
-    <link href="/audio/install-button.css" rel="stylesheet" type="text/css">
 
-    <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js">
-    //advice from console to use ^^^ instead of "https://www.gstatic.com/firebasejs/5.3.1/firebase.js"
-    </script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  </head>
-  <body>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
 
-    <div class="wrapper">
+  <title>Web dictaphone</title>
 
-      <header>
-        <h1>An alert has been sent: you can now report more details!</h1>
-      </header>
+  <link href="/audio/app.css" rel="stylesheet" type="text/css">
+  <link href="/audio/install-button.css" rel="stylesheet" type="text/css">
 
+  <link rel="stylesheet" href = "/static/commonStyle.css" type="text/css"> 
+  <link rel="stylesheet" href = "/templates/reportStyle.css" type="text/css">
+
+  <script src="https://www.gstatic.com/firebasejs/5.3.1/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+  <div class="wrapper">
+
+    <!-- <header>
+      <h1>An alert has been sent: you can now report more details!</h1>
+    </header> -->
+
+    <div class="header">
+      <a href="#default" class="logo">Emergency Alerting System</a>
+      <div class="header-right">
+        <a class="active" href="#home">Home</a>
+        <a href="/creators">Creators</a>
+        <a href="/aboutUs">About</a>
+      </div>
+    </div>
+
+    <h1>An alert has been sent: you can now report more details!</h1>
+
+    <div>
       <section class="main-controls">
         <canvas class="visualizer" height="60px"></canvas>
         <div id="buttons">
@@ -27,60 +44,58 @@
           <button class="stop">Stop</button>
         </div>
       </section>
-
-      <section class="sound-clips">
-      </section>
-
-      <section class="details-form">
-        <br><br><br>
-        <form method="post">
-          <div>Any relevant details:</div>
-          <div><textarea id="details" name="details" rows="5" cols="20"></textarea></div>
-          <!-- <input id="details" name="details" type="text"> -->
-          <!-- <input id="url" name="url" type="hidden" value="">
-          <input id="url" name="url" type="file" accept="audio/*" autoComplete="off"/> -->
-          <br>
-          <div>Video Name: <input id="fileNameInput" name="fileNameInput" value="NONE"></div>
-          <br>
-          <div>Video Path: <input id="filePathInput" name="filePathInput" value="NONE"></div>
-          <br>
-          <div><input id="submitButton" type="submit"></div>
-        </form>
-      </section>
-
-      <!-- <section class="upload-button">
-        <button id="uploadButton">Upload recording and/or details!</button>
-      </section> -->
-
     </div>
 
-    <input id="firebase_apiKey" type="hidden" value={{firebase_apiKey}}>
-    <input id="firebase_authDomain" type="hidden" value={{firebase_authDomain}}>
-    <input id="firebase_databaseURL" type="hidden" value={{firebase_databaseURL}}>
-    <input id="firebase_projectId" type="hidden" value={{firebase_projectId}}>
-    <input id="firebase_storageBucket" type="hidden" value={{firebase_storageBucket}}>
-    <input id="firebase_messagingSenderId" type="hidden" value={{firebase_messagingSenderId}}>
+    <section class="sound-clips"></section>
 
-    <!-- <label for="toggle">❔</label>
+    <div>
+      <section class="for_testing">
+        <form method="post">
+          
+          <div class="container">
+            <hr>
+            <textarea id="details" name="details" rows="5" cols="20" placeholder="Addtional Detail Here"></textarea>
+
+            <button type="submit" class="registerbtn">Submit</button>
+          </div>
+
+          <hr>
+
+          <div style="display: none;">Video Name: <input id="fileNameInput" name="fileNameInput" value="NONE"></div>
+          <div style="display: none;">Video Path: <input id="filePathInput" name="filePathInput" value="NONE"></div>
+
+        </form>
+      </section>
+    </div>
+
+  </div>
+
+  <!--</div> -->
+
+  <input id="firebase_apiKey" type="hidden" value={{firebase_apiKey}}>
+  <input id="firebase_authDomain" type="hidden" value={{firebase_authDomain}}>
+  <input id="firebase_databaseURL" type="hidden" value={{firebase_databaseURL}}>
+  <input id="firebase_projectId" type="hidden" value={{firebase_projectId}}>
+  <input id="firebase_storageBucket" type="hidden" value={{firebase_storageBucket}}>
+  <input id="firebase_messagingSenderId" type="hidden" value={{firebase_messagingSenderId}}>
+
+  <!-- <label for="toggle">❔</label>
     <input type="checkbox" id="toggle"> -->
-    <!-- <aside>
-      <h2>Information</h2>
+  <!-- <aside>
+    <h2>Information</h2>
 
-      <p>Web dictaphone is built using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia">getUserMedia</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder_API">MediaRecorder API</a>, which provides an easier way to capture Media streams.</p>
+    <p>Web dictaphone is built using <a href="https://developer.mozilla.org/en-US/docs/Web/API/Navigator.getUserMedia">getUserMedia</a> and the <a href="https://developer.mozilla.org/en-US/docs/Web/API/MediaRecorder_API">MediaRecorder API</a>, which provides an easier way to capture Media streams.</p>
 
-      <p>Icon courtesy of <a href="http://findicons.com/search/microphone">Find Icons</a>. Thanks to <a href="http://soledadpenades.com/">Sole</a> for the Oscilloscope code!</p>
+    <p>Icon courtesy of <a href="http://findicons.com/search/microphone">Find Icons</a>. Thanks to <a href="http://soledadpenades.com/">Sole</a> for the Oscilloscope code!</p>
 
-      <button id="install-btn">Install app</button>
-    </aside> -->
+    <button id="install-btn">Install app</button>
+  </aside> -->
 
-    <script src="/audio/install.js"></script>
+  <script src="/audio/install.js"></script>
+  <script src="/audio/mediaDevices-getUserMedia-polyfill.js"></script>
+  <!-- Below is your custom application script -->
+  <script src="/audio/app.js"></script>
 
-    <script src="/audio/mediaDevices-getUserMedia-polyfill.js"></script>
+</body>
 
-    <!-- Below is your custom application script -->
-    <script src="/audio/app.js"></script>
-
-  </body>
 </html>
-
-<!-->

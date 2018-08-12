@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <title>Active Shooter Alerts</title>
+  <link rel="stylesheet" href = "/static/commonStyle.css">
   <link rel="stylesheet" href = "/static/registerStyle.css">
 </head>
 
@@ -22,16 +23,58 @@
     </div>
   </div>
 
-  <p style="font-size: 50px"> Still working on this... Don't touch <p>
+  <div>
+    <form method="post">
+      <div class="container">
+        <h1>Join to Receive Emergency Alerts</h1>
+        <hr>
 
-  <div class="form-style-8">
-    <h2>Join to Receive Emergency Alerts</h2>
-    <form>
-      <input type="text" name="field1" placeholder="Full Name" />
-      <input type="email" name="field2" placeholder="Email" />
-      <input type="url" name="field3" placeholder="Website" />
-      <textarea placeholder="Message" onkeyup="adjust_textarea(this)"></textarea>
-      <input type="button" value="Send Message" />
+        <label for="first_name"><b>First Name</b></label>
+        <input name="first_name" type="text" placeholder="John"  required>
+
+        <label for="last_name"><b>Last Name</b></label>
+        <input name="last_name" type="text" placeholder="Doe" required>
+
+        <label for="work_zipcode"><b>Work Zip Code</b></label>
+        <input name="work_zipcode" type="Number" placeholder="12345" required>
+
+        <label for="home_zipcode"><b>Home Zip Code</b></label>
+        <input name="home_zipcode" type="Number" placeholder="98765" required>
+
+        <label for="email"><b>Email</b></label>
+        <input name="email" type="text" placeholder="Jane_Doe@email.com" required>
+
+        <label for="phone_number"><b>Phone Number</b></label>
+        <input name="phone_number" type="text" placeholder="312-123-4567" required>
+
+        <!--<button class="dropbtn">Dropdown</button>
+          <div class="dropdown-content">
+            <a href="#">Link 1</a>
+            <a href="#">Link 2</a>
+            <a href="#">Link 3</a>
+          </div>-->
+        <label for="phone_carrier"><b>Phone Carrier</b></label>
+        <select class="dropbtn" name="phone_carrier">
+          <option value="Alltel">Alltel</option>
+          <option value="AT&T">AT&T</option>
+          <option value="Boost Mobile">Boost Mobile</option>
+          <option value="Cricket Wireless">Cricket Wireless</option>
+          <option value="MetroPCS">MetroPCS</option>
+          <option value="Project Fi">Project Fi</option>
+          <option value="Republic Wireless">Republic Wireless</option>
+          <option value="Sprint">Sprint</option>
+          <option value="Ting">Ting</option>
+          <option value="T-Mobile">T-Mobile</option>
+          <option value="US Cellular">US Cellular</option>
+          <option value="Verizon Wireless">Verizon Wireless</option>
+          <option value="Virgin Mobile">Virgin Mobile</option>
+        </select>
+
+        <button type="submit" class="registerbtn">Subscribe</button>
+      </div>
+
+      <hr>
+
     </form>
   </div>
 
