@@ -53,7 +53,7 @@ class RegisterHandler(webapp2.RequestHandler):
         }
         
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('static/register_test.html')
+        template = jinja_env.get_template('templates/register_test.html')
 
         logging.info("NEW PAGE IS ABOUT TO RENDER")
 
