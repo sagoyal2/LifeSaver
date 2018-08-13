@@ -1,4 +1,5 @@
-window.addEventListener("load", mainScript)
+// window.addEventListener("load", mainScript)
+mainScript();
 
 function mainScript(){
 

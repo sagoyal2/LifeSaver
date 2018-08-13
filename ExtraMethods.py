@@ -5,6 +5,8 @@ from google.appengine.api import urlfetch
 import urllib
 import urllib2
 
+import logging
+
 #returns a list of zip codes within distance of ZIP
 #https://docs.python.org/2/howto/urllib2.html
 def getNearbyZipCodesJSON(ZIP, distance): #NOTE that ZIP is string, distance is number
@@ -60,8 +62,14 @@ def getPhoneNumberEmail(phoneNumber, phoneCarrier):
 def latLonToZIP(latitude, longitude):
     google_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&result_type=postal_code&key=%s" % (str(latitude), str(longitude), Keys.google_key)
     urlContent = urlfetch.fetch(google_url).content
+    logging.info(google_url)
     response = json.loads(urlContent)
-    return str(response["results"][0]["address_components"][0]["short_name"])
+    response = response["results"]
+    response = response[0]
+    response = response["address_components"]
+    response = response[0]
+    response = response["short_name"]
+    return str(response)
 
 #https://developers.google.com/maps/documentation/geocoding/intro
 def latLonToAddress(latitude, longitude):

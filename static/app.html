@@ -7,7 +7,7 @@
   <link rel="stylesheet" href = "/static/commonStyle.css">
   <link rel="stylesheet" href = "/static/appStyle.css">
   <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
-  <script src="/static/app_script.js"></script>
+  <!-- <script src="/static/app_script.js"></script> -->
 </head>
 
 <body>
@@ -33,10 +33,14 @@
     <span> Receive Emergency Alerts </span>
   </button>
 
+  <div style="display: none;">
   <form id="hiddenForm" method="post">
-    <div style="display: none;">Latitude: <input id="latitudeInput" name="latitudeInput" value="NONE"></div>
-    <div style="display: none;">Longitude: <input id="longitudeInput" name="longitudeInput" value="NONE"></div>
+    <input id="latitudeInput" name="latitudeInput" value="NONE">
+    <input id="longitudeInput" name="longitudeInput" value="NONE">
   </form>
+  </div>
+
+  <script src="/static/app_script.js"></script>
 
 </body>
 
