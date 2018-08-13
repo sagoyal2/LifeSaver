@@ -1,3 +1,5 @@
+import ExtraMethods
+
 import httplib2
 from httplib2 import Http
 import os
@@ -112,10 +114,23 @@ def SendOneEmail(recipient, subject, content):
 
     testSend = SendMessage(service, 'me', testMessage)
 
-# Will send an email to everybody with the given zip code
-def sendAlerts(zipCode):
+# Will send an email to everybody with the given zip code, using the address of the situation as another input
+def sendAlerts(zipCode, address):
     q = Subscriber.all()
     q = q.filter(home_zipcode, zipCode)
 
+    # I modified this to contact the user via email and/or phone, depending on what is available
     for user in q:
-        SendOneEmail(user.email, "ALERT: SHOOTING IN YOUR AREA", "FOLLOW THESE STEPS FOR SAFETY")
+        userEmail = user.email
+        userPhone = user.phone_number
+        userCarrier = user.phone_carrier
+
+        message = "ALERT: SHOOTING IN YOUR AREA", "AVOID '%s' AND FOLLOW THESE STEPS FOR SAFETY" % (address)
+
+        if len(userEmail) > 0:
+            logging.info("sent message to " + userEmail)
+            SendOneEmail(userEmail, message)
+
+        if len(userPhone) > 0 and len(userCarrier) > 0:
+            SendOneEmail(ExtraMethods.getPhoneNumberEmail(userPhone, userCarrier), message)
+            logging.info("sent message to " + userPhone)

@@ -17,10 +17,23 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render())
 
     def post(self):
+        #gets location of person making the report
         latitudeInput = self.request.get('latitudeInput')
         longitudeInput = self.request.get('longitudeInput')
         logging.info(latitudeInput)
         logging.info(longitudeInput)
+
+        #gets address and ZIP code using extramethods
+        zip = ExtraMethods.latLonToZIP(latitudeInput, longitudeInput)
+        address = ExtraMethods.latLonToAddress(latitudeInput, longitudeInput)
+        logging.info(zip)
+        logging.info(address)
+
+        #calls the EmailMain method to alert all users
+        EmailMain.sendAlerts(zip, address)
+        logging.info("sent alerts!")
+
+        logging.info("redirect to report page!")
         return webapp2.redirect("/report")
 
 
