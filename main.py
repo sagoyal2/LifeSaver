@@ -16,6 +16,10 @@ class MainHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('static/app.html')
         self.response.write(template.render())
 
+    def post(self):
+        logging.info("DOES SOMETHING")
+        
+
 class RegisterHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'

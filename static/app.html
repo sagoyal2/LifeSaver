@@ -23,7 +23,7 @@
   <!-- <button class="button" style="vertical-align:middle" onclick="location.href='https://life-saver-demo.appspot.com/report'" type="button">
     <span> Report an Emergency  </span>
   </button> -->
-  <button class="button" style="vertical-align:middle" onclick="location.href='/report'" type="button">
+  <button id="reportButton" class="button" style="vertical-align:middle" type="button">
     <span> Report an Emergency  </span>
   </button>
 
@@ -31,6 +31,12 @@
     <span> Receive Emergency Alerts </span>
   </button>
 
+  <form method="post">
+    <div style="display: none;">Latitude: <input id="latitudeInput" name="latitudeInput" value="NONE"></div>
+    <div style="display: none;">Longitude: <input id="longitudeInput" name="longitudeInput" value="NONE"></div>
+  </form>
+
+  <script src="/static/app_script.js"></script>
 
 </body>
 
