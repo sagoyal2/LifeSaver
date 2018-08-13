@@ -119,40 +119,45 @@ class ReportHandler(webapp2.RequestHandler):
         self.response.write(template.render(data))
 
     def post(self):
-        logging.info("POST METHOD WAS CALLED")
+        #gets location of person making the report
+        latitudeInput = self.request.get('latitudeInput')
+        longitudeInput = self.request.get('longitudeInput')
+        logging.info(latitudeInput)
+        logging.info(longitudeInput)
 
-        # url = self.request.get('#url')
+        #gets address and ZIP code using extramethods
+        zip = ExtraMethods.latLonToZIP(latitudeInput, longitudeInput)
+        address = ExtraMethods.latLonToAddress(latitudeInput, longitudeInput)
+        logging.info(zip)
+        logging.info(address)
+
+        #gets details and/or file info
         details = self.request.get('details')
         fileName = self.request.get('fileNameInput')
         filePath = self.request.get('filePathInput')
         fileURL = self.request.get('fileURLInput')
 
-        logging.info("FILE NAME: " + fileName)
-        logging.info("FILE PATH: " + filePath)
-        logging.info("DETAILS: " + details)
+        #calls the EmailMain method to alert all users
+        subject = "ALERT: SHOOTING IN YOUR AREA"
+        content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
+        searchRadius = 10 #10 miles
 
-        #DOES SOMETHING WITH EMAIL HERE !!!
-        logging.info("EMAIL SENT")
+        for zip in ExtraMethods.getNearbyZipCodesJSON(zipCode, searchRadius):
+            EmailMain.sendAlerts(zip, subject, content)
 
+        logging.info("sent alerts!")
 
         data = {
-            # "url":url,
             "fileName":fileName,
             "filePath":filePath,
             "fileURL":fileURL,
             "details":details,
-            # firebase_apiKey : Keys.firebase_apiKey,
-            # firebase_authDomain : Keys.firebase_authDomain,
-            # firebase_databaseURL : Keys.firebase_databaseURL,
-            # firebase_projectId : Keys.firebase_projectId,
-            # firebase_storageBucket : Keys.firebase_storageBucket,
-            # firebase_messagingSenderId : Keys.firebase_messagingSenderId
+            "address":address,
+            "zip":zip
         }
 
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/report_test.html')
-
-        logging.info("NEW PAGE IS ABOUT TO RENDER")
 
         self.response.write(template.render(data))
 
