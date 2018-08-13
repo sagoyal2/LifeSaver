@@ -3,6 +3,7 @@ import jinja2
 import os
 import ExtraMethods
 import EmailMain
+import Database
 import Keys
 import logging
 
