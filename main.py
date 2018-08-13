@@ -30,7 +30,10 @@ class MainHandler(webapp2.RequestHandler):
         logging.info(address)
 
         #calls the EmailMain method to alert all users
-        EmailMain.sendAlerts(zip, address)
+        subject = "ALERT: SHOOTING IN YOUR AREA"
+        content = "AVOID '%s' AND FOLLOW THESE STEPS FOR SAFETY" % (address)
+
+        EmailMain.sendAlerts(zip, subject, content)
         logging.info("sent alerts!")
 
         logging.info("redirect to report page!")
@@ -71,10 +74,13 @@ class RegisterHandler(webapp2.RequestHandler):
             "phone_carrier" : phone_carrier
         }
 
+        newUser = Database.Subscriber(first_name=first_name, last_name=last_name, work_zipcode=work_zipcode, home_zipcode=home_zipcode, email=email, phone_number=phone_number, phone_carrier=phone_carrier)
+        newUser.put()
+
+        logging.info("Added to Datastore!")
+
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/register_confirmation.html')
-
-        logging.info("NEW PAGE IS ABOUT TO RENDER")
 
         self.response.write(template.render(data))
 

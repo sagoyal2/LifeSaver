@@ -111,26 +111,37 @@ def CreateMessage(sender, to, subject, message_text):
 # Recipient, subject, and content should be passed in as strings
 def SendOneEmail(recipient, subject, content):
     testMessage = CreateMessage('lifesaverprojectdemo@gmail.com', recipient, subject, content)
-
     testSend = SendMessage(service, 'me', testMessage)
 
-# Will send an email to everybody with the given zip code, using the address of the situation as another input
-def sendAlerts(zipCode, address):
-    q = Subscriber.all()
-    q = q.filter(home_zipcode, zipCode)
+# Will send an email to everybody within a radius of the zip code, using subject/content to draft the email
+def sendAlerts(zipCode, radius, subject, content):
+    for zip in ExtraMethods.getNearbyZipCodesJSON(zipCode, radius):
+        sendAlertsHelper(zip, subject, content)
 
+# Will send an email to everybody with the specific zip code, using subject/content to draft the email
+def sendAlertsHelper(zipCode, subject, content):
+    #queries once for home zip code
+    q = Database.Subscriber.all()
+    q = q.filter(home_zipcode, zipCode)
+    sendAlertsHelper2(q, subject, content)
+
+    #queries second time for work zip code
+    q = Database.Subscriber.all()
+    q = q.filter(work_zipcode, zipCode)
+    sendAlertsHelper2(q, subject, content)
+
+# Will send an email to everyone in the list of queries, using subject/content to draft the email
+def sendAlertsHelper2(queries, subject, content):
     # I modified this to contact the user via email and/or phone, depending on what is available
-    for user in q:
+    for user in queries:
         userEmail = user.email
         userPhone = user.phone_number
         userCarrier = user.phone_carrier
 
-        message = "ALERT: SHOOTING IN YOUR AREA", "AVOID '%s' AND FOLLOW THESE STEPS FOR SAFETY" % (address)
-
         if len(userEmail) > 0:
             logging.info("sent message to " + userEmail)
-            SendOneEmail(userEmail, message)
+            SendOneEmail(userEmail, subject, content)
 
         if len(userPhone) > 0 and len(userCarrier) > 0:
-            SendOneEmail(ExtraMethods.getPhoneNumberEmail(userPhone, userCarrier), message)
+            SendOneEmail(ExtraMethods.getPhoneNumberEmail(userPhone, userCarrier), subject, content)
             logging.info("sent message to " + userPhone)
