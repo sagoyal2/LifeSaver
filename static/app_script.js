@@ -6,6 +6,7 @@ function mainScript(){
   var latInput = document.getElementById("latitudeInput");
   var lonInput = document.getElementById("longitudeInput");
   var button = document.getElementById("reportButton");
+  var form = document.getElementById("hiddenForm")
 
   //requests to get location upon page loading
   getLocation();
@@ -20,8 +21,8 @@ function mainScript(){
     //chance to confirm
     var confirmReport = confirm("Are you sure you want to report an incident?");
     if (confirmReport == true) {
-      //calls post method
-      console.log("POST")
+      //submits hidden form
+      form.submit()
     }
   }
 

@@ -17,8 +17,12 @@ class MainHandler(webapp2.RequestHandler):
         self.response.write(template.render())
 
     def post(self):
-        logging.info("DOES SOMETHING")
-        
+        latitudeInput = self.request.get('latitudeInput')
+        longitudeInput = self.request.get('longitudeInput')
+        logging.info(latitudeInput)
+        logging.info(longitudeInput)
+        return webapp2.redirect("/report")
+
 
 class RegisterHandler(webapp2.RequestHandler):
     def get(self):
