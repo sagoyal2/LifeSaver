@@ -1,11 +1,22 @@
 import ExtraMethods
 
+
+#FOLLOW THIS FOR THE LIBRARIES BELOW https://cloud.google.com/appengine/docs/standard/python/tools/using-libraries-python-27#vendoring
+#RUN THIS CODE "pip install -t lib/ <library_name>"
 import httplib2
 from httplib2 import Http
 import os
 import Database
-from apiclient import discovery
-from apiclient.discovery import build
+
+# from apiclient import discovery
+from googleapiclient import discovery
+
+#FOLLOW THIS https://stackoverflow.com/questions/18267749/importerror-no-module-named-apiclient-discovery
+#FOLLOW THIS TOO: https://developers.google.com/api-client-library/python/start/installation
+
+# from apiclient.discovery import build
+from googleapiclient.discovery import build
+
 import oauth2client
 from oauth2client import file, client, tools
 
@@ -15,6 +26,9 @@ try:
     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
 except ImportError:
     flags = None
+except:
+    flags = None
+#this last statement was an attempt to fix a runtime error
 
 SCOPES = 'https://mail.google.com/'
 CLIENT_SECRET_FILE = 'client_secret.json'
@@ -63,9 +77,12 @@ from email.mime.text import MIMEText
 import mimetypes
 from httplib2 import Http
 
-from apiclient import errors
+# from apiclient import errors
+from googleapiclient import errors
 
-from apiclient.discovery import build
+
+# from apiclient.discovery import build
+from googleapiclient.discovery import build
 credentials = get_credentials()
 service = build('gmail', 'v1', http=credentials.authorize(Http()))
 
