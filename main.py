@@ -25,6 +25,9 @@ class MainHandler(webapp2.RequestHandler):
         logging.info(latitudeInput)
         logging.info(longitudeInput)
 
+        # if latitudeInput is "NONE" or longitudeInput is "NONE":
+        #     return webapp2.redirect("/main")
+
         #gets address and ZIP code using extramethods
         zip = ExtraMethods.latLonToZIP(latitudeInput, longitudeInput)
         address = ExtraMethods.latLonToAddress(latitudeInput, longitudeInput)
@@ -36,8 +39,8 @@ class MainHandler(webapp2.RequestHandler):
         content = "AVOID '%s' AND FOLLOW THESE STEPS FOR SAFETY" % (address)
         searchRadius = 10 #10 miles
 
-        for zip in ExtraMethods.getNearbyZipCodesJSON(zipCode, searchRadius):
-            EmailMain.sendAlerts(zip, subject, content)
+        for zipCode in ExtraMethods.getNearbyZipCodesJSON(zip, searchRadius):
+            EmailMain.sendAlerts(zipCode, subject, content)
 
         logging.info("sent alerts!")
 
