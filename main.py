@@ -42,10 +42,9 @@ class RegisterHandler(webapp2.RequestHandler):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('static/register.html')
         self.response.write(template.render())
+
     def post(self):
         logging.info("POST METHOD WAS CALLED")
-
-        # url = self.request.get('#url')
 
         first_name = self.request.get('first_name')
         last_name = self.request.get('last_name')
@@ -55,13 +54,12 @@ class RegisterHandler(webapp2.RequestHandler):
         phone_number = self.request.get('phone_number')
         phone_carrier = self.request.get('phone_carrier')
 
-        logging.info("FILE NAME: " + first_name)
-        logging.info("FILE PATH: " + email)
-        logging.info("DETAILS: " + phone_carrier)
-
-        #DOES SOMETHING WITH EMAIL HERE !!!
-        logging.info("Message Sent")
-
+        # logging.info("FILE NAME: " + first_name)
+        # logging.info("FILE PATH: " + email)
+        # logging.info("DETAILS: " + phone_carrier)
+        #
+        # #DOES SOMETHING WITH EMAIL HERE !!!
+        # logging.info("Message Sent")
 
         data = {
             "first_name" : first_name,
@@ -74,20 +72,19 @@ class RegisterHandler(webapp2.RequestHandler):
         }
 
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/register_test.html')
+        template = jinja_env.get_template('templates/register_confirmation.html')
 
         logging.info("NEW PAGE IS ABOUT TO RENDER")
 
         self.response.write(template.render(data))
 
 
-        """
-        self.response.headers['Content-Type'] = 'text/html'
-        self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('static/rhf.html')
-        self.response.write(template.render())
-        """
-
+        # """
+        # self.response.headers['Content-Type'] = 'text/html'
+        # self.response.headers['Content-Type'] = 'text/html'
+        # template = jinja_env.get_template('static/rhf.html')
+        # self.response.write(template.render())
+        # """
 
 class RHFHandler(webapp2.RequestHandler):
     def get(self):
