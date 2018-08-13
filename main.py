@@ -2,6 +2,7 @@ import webapp2
 import jinja2
 import os
 import ExtraMethods
+import EmailMain
 import Keys
 import logging
 
@@ -32,8 +33,9 @@ class MainHandler(webapp2.RequestHandler):
         #calls the EmailMain method to alert all users
         subject = "ALERT: SHOOTING IN YOUR AREA"
         content = "AVOID '%s' AND FOLLOW THESE STEPS FOR SAFETY" % (address)
+        searchRadius = 10 #10 miles
 
-        for zip in ExtraMethods.getNearbyZipCodesJSON(zipCode, radius):
+        for zip in ExtraMethods.getNearbyZipCodesJSON(zipCode, searchRadius):
             EmailMain.sendAlerts(zip, subject, content)
 
         logging.info("sent alerts!")

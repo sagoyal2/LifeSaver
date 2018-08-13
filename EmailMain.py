@@ -118,12 +118,12 @@ def sendAlerts(zipCode, subject, content):
     #queries once for home zip code
     q = Database.Subscriber.all()
     q = q.filter(home_zipcode, zipCode)
-    sendAlertsHelper2(q, subject, content)
+    sendAlertsHelper(q, subject, content)
 
     #queries second time for work zip code
     q = Database.Subscriber.all()
     q = q.filter(work_zipcode, zipCode)
-    sendAlertsHelper2(q, subject, content)
+    sendAlertsHelper(q, subject, content)
 
 # Will send an email to everyone in the list of queries, using subject/content to draft the email
 def sendAlertsHelper(queries, subject, content):
