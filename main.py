@@ -33,7 +33,9 @@ class MainHandler(webapp2.RequestHandler):
         subject = "ALERT: SHOOTING IN YOUR AREA"
         content = "AVOID '%s' AND FOLLOW THESE STEPS FOR SAFETY" % (address)
 
-        EmailMain.sendAlerts(zip, subject, content)
+        for zip in ExtraMethods.getNearbyZipCodesJSON(zipCode, radius):
+            EmailMain.sendAlerts(zip, subject, content)
+
         logging.info("sent alerts!")
 
         logging.info("redirect to report page!")
