@@ -19,14 +19,13 @@ function mainScript(){
   //https://www.w3schools.com/jsref/prop_style_display.asp
   buttonDiv.style.display = "none";
 
-
   facilitator(() => {
 
-  //reveals button once location is downloaded
-  buttonDiv.style.display = "block";
+    //reveals button once location is downloaded - this currently doesn't work
+    buttonDiv.style.display = "block";
 
-  //also adds listener for button click once location is downloaded
-  button.addEventListener("click", onClick);
+    //also adds listener for button click once location is downloaded
+    button.addEventListener("click", onClick);
 
 });
 }
@@ -47,7 +46,11 @@ function onClick(){
   //chance to confirm
   var confirmReport = confirm("Are you sure you want to report an incident?");
   if (confirmReport == true) {
-    //submits hidden form
+    //submits hidden form, waiting a certain amount of time before it submits [currently 3 seconds]
+    //https://stackoverflow.com/questions/8133947/how-to-wait-for-a-period-of-time-after-a-function-run/8133991
+    setTimeout(function() {
+    // rest of code here
+    }, 3000);
     form.submit()
   }
 }
