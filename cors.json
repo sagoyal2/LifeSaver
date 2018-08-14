@@ -1,0 +1,12 @@
+/* This lets us access Firebase once we deploy */
+/* https://firebase.google.com/docs/storage/web/download-files */
+
+/* gsutil cors set cors.json gs://<your-cloud-storage-bucket> */
+
+[
+  {
+    "origin": ["*"],
+    "method": ["GET"],
+    "maxAgeSeconds": 3600
+  }
+]
