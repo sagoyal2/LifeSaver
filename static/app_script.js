@@ -47,10 +47,7 @@ function onClick(){
   var confirmReport = confirm("Are you sure you want to report an incident?");
   if (confirmReport == true) {
     //submits hidden form, waiting a certain amount of time before it submits [currently 3 seconds]
-    //https://stackoverflow.com/questions/8133947/how-to-wait-for-a-period-of-time-after-a-function-run/8133991
-    setTimeout(function() {
-    // rest of code here
-    }, 3000);
+    setTimeout(() => {}, 2000);
     form.submit()
   }
 }

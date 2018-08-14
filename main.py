@@ -146,8 +146,8 @@ class ReportHandler(webapp2.RequestHandler):
         content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
         searchRadius = 10 #10 miles
 
-        for zip in ExtraMethods.getNearbyZipCodesJSON(zipCode, searchRadius):
-            EmailMain.sendAlerts(zip, subject, content)
+        for zipCode in ExtraMethods.getNearbyZipCodesJSON(zip, searchRadius):
+            EmailMain.sendAlerts(zipCode, subject, content)
 
         logging.info("sent alerts!")
 
