@@ -1,4 +1,5 @@
 import ExtraMethods
+import logging
 #The commented lines below need to be discussed- they should work for now
 
 #FOLLOW THIS FOR THE LIBRARIES BELOW https://cloud.google.com/appengine/docs/standard/python/tools/using-libraries-python-27#vendoring
@@ -133,13 +134,19 @@ def SendOneEmail(recipient, subject, content):
 # Will send an email to everybody with the specific zip code, using subject/content to draft the email
 def sendAlerts(zipCode, subject, content):
     #queries once for home zip code
-    q = Database.Subscriber.all()
-    q = q.filter(home_zipcode, zipCode)
+    q = Database.Subscriber.query(Database.Subscriber.home_zipcode == zipCode).fetch()
+
+    # I don't think this code works @Diego, so I changed it to ^^ as a fix
+    # q = Database.Subscriber.all()
+    # q = q.filter(home_zipcode, zipCode)
     sendAlertsHelper(q, subject, content)
 
     #queries second time for work zip code
-    q = Database.Subscriber.all()
-    q = q.filter(work_zipcode, zipCode)
+    q = Database.Subscriber.query(Database.Subscriber.work_zipcode == zipCode).fetch()
+
+    # Same as before ^
+    # q = Database.Subscriber.all()
+    # q = q.filter(work_zipcode, zipCode)
     sendAlertsHelper(q, subject, content)
 
 # Will send an email to everyone in the list of queries, using subject/content to draft the email

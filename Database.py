@@ -1,10 +1,10 @@
-from google.appengine.ext import db #imports Google Datastore
+from google.appengine.ext import ndb #imports Google Datastore
 
-class Subscriber(db.Model): #defines Subscriber data type
-    first_name = db.StringProperty(required=True) #holds user first name
-    last_name = db.StringProperty(required=True) #holds user last name
-    work_zipcode = db.StringProperty(required=True) #holds user work zip
-    home_zipcode = db.StringProperty(required=True) #holds user home zip
-    email = db.StringProperty(required=True) #holds user email
-    phone_number = db.StringProperty(required=True) #holds user phone number as 10 digit string
-    phone_carrier = db.StringProperty(required=True) #holds user phone carrier
+class Subscriber(ndb.Model): #defines Subscriber data type
+    first_name = ndb.StringProperty(required=True) #holds user first name
+    last_name = ndb.StringProperty(required=True) #holds user last name
+    work_zipcode = ndb.StringProperty(required=True) #holds user work zip
+    home_zipcode = ndb.StringProperty(required=True) #holds user home zip
+    email = ndb.StringProperty(required=True) #holds user email
+    phone_number = ndb.StringProperty(required=True) #holds user phone number as 10 digit string
+    phone_carrier = ndb.StringProperty(required=True) #holds user phone carrier
