@@ -3,6 +3,7 @@ var latInput;
 var longInput;
 var button;
 var form;
+var buttonDiv;
 mainScript();
 
 function mainScript(){
@@ -11,17 +12,23 @@ function mainScript(){
   latInput = document.getElementById("latitudeInput");
   lonInput = document.getElementById("longitudeInput");
   button = document.getElementById("reportButton");
+  buttonDiv = document.getElementById("reportButtonDiv");
   form = document.getElementById("hiddenForm")
 
   //hides button until the location is accessible to prevent error
-  button.style.display = "None";
+  //https://www.w3schools.com/jsref/prop_style_display.asp
+  buttonDiv.style.display = "none";
+
+
+  facilitator(() => {
 
   //reveals button once location is downloaded
-  facilitator(() => {button.style.display = "Block";});
+  buttonDiv.style.display = "block";
 
-  //adds listener for button click
+  //also adds listener for button click once location is downloaded
   button.addEventListener("click", onClick);
 
+});
 }
 
 //https://stackoverflow.com/questions/21518381/proper-way-to-wait-for-one-function-to-finish-before-continuing
