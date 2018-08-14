@@ -15,29 +15,16 @@ function mainScript(){
   buttonDiv = document.getElementById("reportButtonDiv");
   form = document.getElementById("hiddenForm")
 
-  //hides button until the location is accessible to prevent error
-  //https://www.w3schools.com/jsref/prop_style_display.asp
-  buttonDiv.style.display = "none";
+  //while location is loading, this handler alerts that the user needs to wait
+  button.addEventListener("click", waitToLoad);
 
-  facilitator(() => {
+  getLocation();
 
-    //reveals button once location is downloaded - this currently doesn't work
-    buttonDiv.style.display = "block";
-
-    //also adds listener for button click once location is downloaded
-    button.addEventListener("click", onClick);
-
-});
 }
 
-//https://stackoverflow.com/questions/21518381/proper-way-to-wait-for-one-function-to-finish-before-continuing
-function facilitator(_callback){
-    //requests to get location upon page loading
-    getLocation();
-
-    // do some asynchronous work
-    // and when the asynchronous stuff is complete
-    _callback();
+//runs when button is clicked
+function waitToLoad(){
+  alert("You need to wait for your location to load!")
 }
 
 //runs when button is clicked
@@ -46,11 +33,10 @@ function onClick(){
   //chance to confirm
   var confirmReport = confirm("Are you sure you want to report an incident?");
   if (confirmReport == true) {
-    //submits hidden form, waiting a certain amount of time before it submits [currently 3 seconds]
-    setTimeout(() => {}, 2000);
     form.submit()
   }
 }
+
 
 //https://www.w3schools.com/htmL/html5_geolocation.asp
 function getLocation() {
@@ -66,4 +52,22 @@ function showPosition(position) {
     lonInput.value = position.coords.longitude;
     console.log(latInput.value);
     console.log(lonInput.value);
+
+    // console.log("TEST 1")
+    // //waits a certain amount of time before it changes listener
+    // sleep(2000).then(() => {
+    //     // Do something after the sleep!
+    // console.log("TEST 2")
+
+    //removes the first alert when button is clicked- replaces with confirm/post method
+    //https://www.w3schools.com/jsref/met_element_removeeventlistener.asp
+    button.removeEventListener("click", waitToLoad);
+    button.addEventListener("click", onClick);
+    // })
+}
+
+// https://davidwalsh.name/javascript-sleep-function
+// https://zeit.co/blog/async-and-await
+function sleep (time) {
+  return new Promise((resolve) => setTimeout(resolve, time));
 }
