@@ -15,26 +15,30 @@ function mainScript(){
   buttonDiv = document.getElementById("reportButtonDiv");
   form = document.getElementById("hiddenForm")
 
-  //while location is loading, this handler alerts that the user needs to wait
-  button.addEventListener("click", waitToLoad);
-
-  getLocation();
+  //handler to trigger events when Report button clicked
+  button.addEventListener("click", onClick);
 
 }
 
-//runs when button is clicked
+//runs when button is clicked after initial report
 function waitToLoad(){
-  alert("You need to wait for your location to load!")
+  alert("Please wait for your location to load!")
 }
 
 //runs when button is clicked
 function onClick(){
-  //https://www.w3schools.com/jsref/met_win_confirm.asp
-  //chance to confirm
-  var confirmReport = confirm("Are you sure you want to report an incident?");
-  if (confirmReport == true) {
-    form.submit()
-  }
+  console.log("Report button was clicked!")
+
+  //removes the first handler for when report button is clicked- replaces with normal alert
+  //https://www.w3schools.com/jsref/met_element_removeeventlistener.asp
+  button.removeEventListener("click", onClick);
+  button.addEventListener("click", waitToLoad);
+
+  console.log("Handlers changed!")
+
+  getLocation();
+
+  alert("Your browser may ask if we can access your location. This is needed to accurately report your location. After you give us permission, it may take a few seconds to load your location.")
 }
 
 
@@ -59,11 +63,20 @@ function showPosition(position) {
     //     // Do something after the sleep!
     // console.log("TEST 2")
 
-    //removes the first alert when button is clicked- replaces with confirm/post method
-    //https://www.w3schools.com/jsref/met_element_removeeventlistener.asp
+
+    // })
+
+    //https://www.w3schools.com/jsref/met_win_confirm.asp
+    //chance to confirm
+    var confirmReport = confirm("Are you sure you want to report an incident?");
+    if (confirmReport == true) {
+      console.log("FORM SUBMITTING")
+      form.submit()
+    }
+
+    //in case they cancel, add back handler for report submitting
     button.removeEventListener("click", waitToLoad);
     button.addEventListener("click", onClick);
-    // })
 }
 
 // https://davidwalsh.name/javascript-sleep-function
