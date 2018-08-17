@@ -3,7 +3,6 @@ import jinja2
 import os
 import ExtraMethods
 import EmailMain
-# import CloudSpeech
 import Database
 import Keys
 import logging
@@ -142,8 +141,6 @@ class ReportHandler(webapp2.RequestHandler):
         filePath = self.request.get('filePathInput')
         fileURL = self.request.get('fileURLInput')
 
-        # CloudSpeech.transcribe_gcs(fileURL)
-
         #calls the EmailMain method to alert all users
         subject = "ALERT: SHOOTING IN YOUR AREA"
         content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
@@ -200,6 +197,5 @@ app = webapp2.WSGIApplication([
     ('/report', ReportHandler),
     ('/creators', CreatorsHandler),
     ('/aboutUs', AboutUsHandler),
-    ('/test', TestHandler),
-    ('/speech', TestHandler)
+    ('/test', TestHandler)
     ], debug=True)
