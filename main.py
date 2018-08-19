@@ -167,7 +167,8 @@ class ReportHandler(webapp2.RequestHandler):
                             <source src="%s" type="audio/ogg">
                             Your browser does not support the audio controls element.
                             </audio>
-                            </body></html>""" % (content, fileURL)
+                            <div><a href="/report_notification/?address=%s,details=%s,url=%s">View this alert online</a></div>
+                            </body></html>""" % (content, fileURL, address, details, fileURL)
         #https://www.w3schools.com/html/html5_audio.asp
 
         searchRadius = 10 #10 miles
@@ -221,6 +222,26 @@ class TestHandler(webapp2.RequestHandler):
         # self.response.write(ExtraMethods.latLonToAddress(latitudeLongitude[0], latitudeLongitude[1]))
         self.response.write(ExtraMethods.getNearbyZipCodesJSON("60565", 5))
 
+class ReportNotificationHandler(webapp2.RequestHandler):
+    def get(self):
+        #https://stackoverflow.com/questions/5767678/appengine-get-parameters
+        address = self.request.get_all("address")
+        details = self.request.get_all("details")
+        fileURL = self.request.get_all("url")
+
+        content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
+        html_content = """<html><head></head><body>
+                            <p>%s</p>
+                            <audio controls>
+                            <source src="%s" type="audio/ogg">
+                            Your browser does not support the audio controls element.
+                            </audio>
+                            </body></html>""" % (content, fileURL)
+
+        self.response.headers['Content-Type'] = 'text/html'
+        self.response.write(html_content)
+
+
 app = webapp2.WSGIApplication([
     ('/', MainHandler),
     ('/register', RegisterHandler),
@@ -228,5 +249,6 @@ app = webapp2.WSGIApplication([
     ('/report', ReportHandler),
     ('/creators', CreatorsHandler),
     ('/aboutUs', AboutUsHandler),
-    ('/test', TestHandler)
+    ('/test', TestHandler),
+    ('/report_notification', ReportNotificationHandler)
     ], debug=True)
