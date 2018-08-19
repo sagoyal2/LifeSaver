@@ -153,7 +153,7 @@ def CreateMessage(sender, to, subject, message_text):
 
 # https://stackoverflow.com/questions/41403458/how-do-i-send-html-formatted-emails-through-the-gmail-api-for-python
 def CreateHTMLMessage(sender, to, subject, message_html):
-  message = MIMEText(message_text, 'html')
+  message = MIMEText(message_html, 'html')
   message['to'] = to
   message['from'] = sender
   message['subject'] = subject
