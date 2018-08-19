@@ -250,5 +250,5 @@ app = webapp2.WSGIApplication([
     ('/creators', CreatorsHandler),
     ('/aboutUs', AboutUsHandler),
     ('/test', TestHandler),
-    ('/report_notification', ReportNotificationHandler)
+    ('/report_notification/', ReportNotificationHandler)
     ], debug=True)
