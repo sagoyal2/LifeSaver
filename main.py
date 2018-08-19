@@ -161,12 +161,24 @@ class ReportHandler(webapp2.RequestHandler):
         #calls the EmailMain method to alert all users
         subject = "ALERT: SHOOTING IN YOUR %s AREA"
         content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
+        html_content = """<html><head></head><body>
+                            <p>%s</p>
+                            <audio controls>
+                            <source src="%s" type="audio/ogg">
+                            Your browser does not support the audio controls element.
+                            </audio>
+                            </body></html>""" % (content, fileURL)
+        #https://www.w3schools.com/html/html5_audio.asp
+
         searchRadius = 10 #10 miles
 
         for zipCode in ExtraMethods.getNearbyZipCodesJSON(zip, searchRadius):
             #EmailMain.sendAlerts(zipCode, subject, content)
-            EmailMain2.sendAlertsHome(zipCode, subject % ("LOCAL"), content)
-            EmailMain2.sendAlertsWork(zipCode, subject % ("WORK"), content)
+            # EmailMain2.sendAlertsHome(zipCode, subject % ("LOCAL"), content)
+            # EmailMain2.sendAlertsWork(zipCode, subject % ("WORK"), content)
+            EmailMain2.sendAlertsHome(zipCode, subject % ("LOCAL"), html_content)
+            EmailMain2.sendAlertsWork(zipCode, subject % ("WORK"), html_content)
+
 
         logging.info("sent alerts!")
 
