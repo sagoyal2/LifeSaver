@@ -163,12 +163,8 @@ class ReportHandler(webapp2.RequestHandler):
         content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
         html_content = """<html><head></head><body>
                             <p>%s</p>
-                            <audio controls>
-                            <source src="%s" type="audio/ogg">
-                            Your browser does not support the audio controls element.
-                            </audio>
                             <div><a href="https://life-saver-demo.appspot.com/report_notification/?address=%s&details=%s&url=%s">View this alert online</a></div>
-                            </body></html>""" % (content, fileURL, address, details, fileURL)
+                            </body></html>""" % (content, fileURL, address, details, fileURL.replace("https://firebasestorage.googleapis.com/v0/b/life-saver-demo.appspot.com/o/","").replace("&","*"))
         #https://www.w3schools.com/html/html5_audio.asp
 
         searchRadius = 10 #10 miles
@@ -231,8 +227,7 @@ class ReportNotificationHandler(webapp2.RequestHandler):
 
         address = addressRAW.encode('ascii','ignore')
         details = detailsRAW.encode('ascii','ignore')
-        fileURL = fileURLRAW.encode('ascii','ignore')
-
+        fileURL = "https://firebasestorage.googleapis.com/v0/b/life-saver-demo.appspot.com/o/" + fileURLRAW.encode('ascii','ignore').replace("*","&")
 
         content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
         html_content = """<html><head></head><body>
