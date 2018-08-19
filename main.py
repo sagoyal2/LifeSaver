@@ -2,7 +2,8 @@ import webapp2
 import jinja2
 import os
 import ExtraMethods
-import EmailMain
+# import EmailMain
+import EmailMain2
 import Database
 import Keys
 import logging
@@ -40,7 +41,9 @@ class MainHandler(webapp2.RequestHandler):
         searchRadius = 10 #10 miles
 
         for zipCode in ExtraMethods.getNearbyZipCodesJSON(zip, searchRadius):
-            EmailMain.sendAlerts(zipCode, subject, content)
+            # EmailMain.sendAlerts(zipCode, subject, content)
+            EmailMain2.sendAlerts(zipCode, subject, content)
+
 
         logging.info("sent alerts!")
 
@@ -147,7 +150,9 @@ class ReportHandler(webapp2.RequestHandler):
         searchRadius = 10 #10 miles
 
         for zipCode in ExtraMethods.getNearbyZipCodesJSON(zip, searchRadius):
-            EmailMain.sendAlerts(zipCode, subject, content)
+            #EmailMain.sendAlerts(zipCode, subject, content)
+            EmailMain2.sendAlerts(zipCode, subject, content)
+
 
         logging.info("sent alerts!")
 
