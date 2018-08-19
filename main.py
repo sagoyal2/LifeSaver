@@ -225,9 +225,14 @@ class TestHandler(webapp2.RequestHandler):
 class ReportNotificationHandler(webapp2.RequestHandler):
     def get(self):
         #https://stackoverflow.com/questions/5767678/appengine-get-parameters
-        address = self.request.get_all("address")
-        details = self.request.get_all("details")
-        fileURL = self.request.get_all("url")
+        addressRAW = self.request.get("address")
+        detailsRAW = self.request.get("details")
+        fileURLRAW = self.request.get("url")
+
+        address = addressRAW.encode('ascii','ignore')
+        details = detailsRAW.encode('ascii','ignore')
+        fileURL = fileURLRAW.encode('ascii','ignore')
+
 
         content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
         html_content = """<html><head></head><body>
