@@ -150,6 +150,10 @@ def CreateMessage(sender, to, subject, message_text):
 
 # Recipient, subject, and content should be passed in as strings
 def SendOneEmail(recipient, subject, content):
+    # https://stackoverflow.com/questions/14698119/httpexception-deadline-exceeded-while-waiting-for-http-response-from-url-dead
+    from google.appengine.api import urlfetch
+    urlfetch.set_default_fetch_deadline(45)
+
     testMessage = CreateMessage('lifesaverprojectdemo@gmail.com', recipient, subject, content)
     logging.info(testMessage)
     #https://stackoverflow.com/questions/26663529/invalid-value-for-bytestring-error-when-calling-gmail-send-api-with-base64-encod
@@ -158,22 +162,23 @@ def SendOneEmail(recipient, subject, content):
     testSend = SendMessage(service, 'me', testMessage)
 
 # Will send an email to everybody with the specific zip code, using subject/content to draft the email
-def sendAlerts(zipCode, subject, content):
+def sendAlertsHome(zipCode, subject, content):
     #queries once for home zip code
-    q = Database.Subscriber.query(Database.Subscriber.home_zipcode == zipCode).fetch()
-
+    q1 = Database.Subscriber.query(Database.Subscriber.home_zipcode == zipCode).fetch()
+    logging.info(q1)
     # I don't think this code works @Diego, so I changed it to ^^ as a fix
     # q = Database.Subscriber.all()
     # q = q.filter(home_zipcode, zipCode)
-    sendAlertsHelper(q, subject, content)
+    sendAlertsHelper(q1, subject, content)
 
+def sendAlertsWork(zipCode, subject, content):
     #queries second time for work zip code
-    q = Database.Subscriber.query(Database.Subscriber.work_zipcode == zipCode).fetch()
-
+    q2 = Database.Subscriber.query(Database.Subscriber.work_zipcode == zipCode).fetch()
+    logging.info(q2)
     # Same as before ^
     # q = Database.Subscriber.all()
     # q = q.filter(work_zipcode, zipCode)
-    sendAlertsHelper(q, subject, content)
+    sendAlertsHelper(q2, subject, content)
 
 # Will send an email to everyone in the list of queries, using subject/content to draft the email
 def sendAlertsHelper(queries, subject, content):
