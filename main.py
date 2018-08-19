@@ -77,9 +77,9 @@ class RegisterHandler(webapp2.RequestHandler):
 
         #CONFIRMATION NOTIFICATIONS
         if len(email) > 0:
-            EmailMain2.SendOneEmail(email, "Thank you for subscribing!", "We will contact you at this email if there is ever an incident near your work or home ZIP code."):
+            EmailMain2.SendOneEmail(email, "Thank you for subscribing!", "We will contact you at this email if there is ever an incident near your work or home ZIP code.")
         if len(phone_number) > 0:
-            EmailMain2.SendOneEmail(ExtraMethods.getPhoneNumberEmail(phone_number, phone_carrier), "Thank you for subscribing!", "We will contact you at this phone number if there is ever an incident near your work or home ZIP code."):
+            EmailMain2.SendOneEmail(ExtraMethods.getPhoneNumberEmail(phone_number, phone_carrier), "Thank you for subscribing!", "We will contact you at this phone number if there is ever an incident near your work or home ZIP code.")
 
 
         data = {
