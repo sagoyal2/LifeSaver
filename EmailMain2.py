@@ -175,6 +175,19 @@ def SendOneEmail(recipient, subject, content):
     # logging.info(testMessage)
     testSend = SendMessage(service, 'me', testMessage)
 
+# Recipient, subject, and content should be passed in as strings
+def SendOneHTMLEmail(recipient, subject, content):
+    # https://stackoverflow.com/questions/14698119/httpexception-deadline-exceeded-while-waiting-for-http-response-from-url-dead
+    from google.appengine.api import urlfetch
+    urlfetch.set_default_fetch_deadline(45)
+
+    testMessage = CreateHTMLMessage('lifesaverprojectdemo@gmail.com', recipient, subject, content)
+    logging.info(testMessage)
+    #https://stackoverflow.com/questions/26663529/invalid-value-for-bytestring-error-when-calling-gmail-send-api-with-base64-encod
+    # testMessage['raw'] = testMessage['raw'].replace('/','_').replace('+','-');
+    # logging.info(testMessage)
+    testSend = SendMessage(service, 'me', testMessage)
+
 # Will send an email to everybody with the specific zip code, using subject/content to draft the email
 def sendAlertsHome(zipCode, subject, content):
     #queries once for home zip code
@@ -204,8 +217,12 @@ def sendAlertsHelper(queries, subject, content):
 
         if len(userEmail) > 0:
             logging.info("sent message to " + userEmail)
-            SendOneEmail(userEmail, subject, content)
+            #SendOneEmail(userEmail, subject, content)
+            SendOneHTMLEmail(userEmail, subject, content)
+
+
 
         if len(userPhone) > 0 and len(userCarrier) > 0:
-            SendOneEmail(ExtraMethods.getPhoneNumberEmail(userPhone, userCarrier), subject, content)
+            SendOneHTMLEmail(ExtraMethods.getPhoneNumberEmail(userPhone, userCarrier), subject, content)
+            #SendOneEmail(ExtraMethods.getPhoneNumberEmail(userPhone, userCarrier), subject, content)
             logging.info("sent message to " + userPhone)

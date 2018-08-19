@@ -38,12 +38,15 @@ class MainHandler(webapp2.RequestHandler):
         #calls the EmailMain method to alert all users
         subject = "ALERT: SHOOTING IN YOUR %s AREA"
         content = "AVOID '%s' AND FOLLOW THESE STEPS FOR SAFETY" % (address)
+        html_content = "<html><head></head><body>%s</body></html>" % (content)
+
         searchRadius = 10 #10 miles
 
         for zipCode in ExtraMethods.getNearbyZipCodesJSON(zip, searchRadius):
-            # EmailMain.sendAlerts(zipCode, subject, content)
-            EmailMain2.sendAlertsHome(zipCode, subject % ("LOCAL"), content)
-            EmailMain2.sendAlertsWork(zipCode, subject % ("WORK"), content)
+            #EmailMain2.sendAlertsHome(zipCode, subject % ("LOCAL"), content)
+            #EmailMain2.sendAlertsWork(zipCode, subject % ("WORK"), content)
+            EmailMain2.sendAlertsHome(zipCode, subject % ("LOCAL"), html_content)
+            EmailMain2.sendAlertsWork(zipCode, subject % ("WORK"), html_content)
 
 
         logging.info("sent alerts!")
