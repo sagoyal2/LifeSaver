@@ -167,8 +167,8 @@ class ReportHandler(webapp2.RequestHandler):
                             <source src="%s" type="audio/ogg">
                             Your browser does not support the audio controls element.
                             </audio>
-                            <div><a href="https://life-saver-demo.appspot.com/report_notification/?address=%s,details=%s,url=%s">View this alert online</a></div>
-                            </body></html>""" % (content, fileURL, address.replace(","," "), details.replace(","," "), fileURL)
+                            <div><a href="https://life-saver-demo.appspot.com/report_notification/?address=%s&details=%s&url=%s">View this alert online</a></div>
+                            </body></html>""" % (content, fileURL, address, details, fileURL)
         #https://www.w3schools.com/html/html5_audio.asp
 
         searchRadius = 10 #10 miles
