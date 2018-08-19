@@ -97,6 +97,9 @@ class RegisterHandler(webapp2.RequestHandler):
 
         logging.info("Added to Datastore!")
 
+        # return webapp2.redirect("/report")
+
+        # COMMENTED OUT OLD TEMPLATE/TEST PAGE FOR CONFIRMATION
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/register_confirmation.html')
 
