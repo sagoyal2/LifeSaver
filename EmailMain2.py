@@ -146,7 +146,21 @@ def CreateMessage(sender, to, subject, message_text):
   message['to'] = to
   message['from'] = sender
   message['subject'] = subject
-  return {'raw': base64.b64encode(message.as_string())}
+  #return {'raw': base64.b64encode(message.as_string())}
+  #https://stackoverflow.com/questions/26663529/invalid-value-for-bytestring-error-when-calling-gmail-send-api-with-base64-encod
+  return {'raw': base64.b64encode(message.as_string()).replace('/','_').replace('+','-')}
+
+
+# https://stackoverflow.com/questions/41403458/how-do-i-send-html-formatted-emails-through-the-gmail-api-for-python
+def CreateHTMLMessage(sender, to, subject, message_html):
+  message = MIMEText(message_text, 'html')
+  message['to'] = to
+  message['from'] = sender
+  message['subject'] = subject
+  #return {'raw': base64.b64encode(message.as_string())}
+  #https://stackoverflow.com/questions/26663529/invalid-value-for-bytestring-error-when-calling-gmail-send-api-with-base64-encod
+  return {'raw': base64.b64encode(message.as_string()).replace('/','_').replace('+','-')}
+
 
 # Recipient, subject, and content should be passed in as strings
 def SendOneEmail(recipient, subject, content):
@@ -157,8 +171,8 @@ def SendOneEmail(recipient, subject, content):
     testMessage = CreateMessage('lifesaverprojectdemo@gmail.com', recipient, subject, content)
     logging.info(testMessage)
     #https://stackoverflow.com/questions/26663529/invalid-value-for-bytestring-error-when-calling-gmail-send-api-with-base64-encod
-    testMessage['raw'] = testMessage['raw'].replace('/','_').replace('+','-');
-    logging.info(testMessage)
+    # testMessage['raw'] = testMessage['raw'].replace('/','_').replace('+','-');
+    # logging.info(testMessage)
     testSend = SendMessage(service, 'me', testMessage)
 
 # Will send an email to everybody with the specific zip code, using subject/content to draft the email
