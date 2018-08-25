@@ -1,5 +1,7 @@
 <html>
 <head>
+  <link rel="stylesheet" href = "/static/commonStyle.css">
+  <link rel="stylesheet" href = "/static/registrationConfirmation.css">
 </head>
 <body>
   <div class="wrapper">
@@ -17,16 +19,20 @@
       </div>
     </div>
 
-  <h1>Thanks for registering!</h1>
-  <h2>Here's what we got from you:</h2>
-  <p>First Name: {{first_name}}</p>
-  <p>Last Name: {{last_name}}</p>
-  <p>Email: {{email}}</p>
-  <p>Work Zipcode: {{work_zipcode}}</p>
-  <p>Home Zipcode: {{home_zipcode}}</p>
-  <p>Phone Number: {{phone_number}}</p>
-  <p>Phone Carrier: {{phone_carrier}}</p>
-  <a href="/">Click here to return home!</a>
+  <div class="main_display">
+    <h1>Thanks for registering!</h1>
+    <h2>Here's what we got from you:</h2>
+    <h3>First Name: {{first_name}}</h3>
+    <h3>Last Name: {{last_name}}</h3>
+    <h3>Email: {{email}}</h3>
+    <h3>Work Zipcode: {{work_zipcode}}</h3>
+    <h3>Home Zipcode: {{home_zipcode}}</h3>
+    <h3>Phone Number: {{phone_number}}</h3>
+    <h3>Phone Carrier: {{phone_carrier}}</h3>
+    <br>
+    <br>
+    <h2><a href="/">Click here to return home!</a></h2>
+  </div>
 </div>
 </body>
 </html>
