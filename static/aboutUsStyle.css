@@ -3,5 +3,19 @@
 }
 
 li{
+  font-size: 140%;
+}
+
+h2 {
   font-size: 150%;
+}
+
+h1{
+  font-size: 180%;
+}
+
+br {
+  display: block; /* makes it have a width */
+  content: ""; /* clears default height */
+  margin-top: 1; /* change this to whatever height you want it */
 }
