@@ -1,3 +1,5 @@
+#This file defines the Datastore model used in our project
+
 from google.appengine.ext import ndb #imports Google Datastore
 
 class Subscriber(ndb.Model): #defines Subscriber data type

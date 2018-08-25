@@ -13,12 +13,15 @@ jinja_env = jinja2.Environment(
     extensions=['jinja2.ext.autoescape'],
     autoescape=True) #creates environment variable for HTML rendering
 
+#This is the handler for the main page
 class MainHandler(webapp2.RequestHandler):
+    #the GET method returns the static home page
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('static/app.html')
         self.response.write(template.render())
 
+    #the POST method sends an email alert based on the location of the user
     def post(self):
         #gets location of person making the report
         latitudeInput = self.request.get('latitudeInput')
@@ -54,13 +57,15 @@ class MainHandler(webapp2.RequestHandler):
         logging.info("redirect to report page!")
         return webapp2.redirect("/report")
 
-
+#This is the handler for the register page
 class RegisterHandler(webapp2.RequestHandler):
+    #the GET method returns the static register page
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('static/register.html')
         self.response.write(template.render())
 
+    #the POST method adds to Datastore and returns a confirmation page/sends a notification
     def post(self):
         logging.info("POST METHOD WAS CALLED")
 
@@ -117,13 +122,18 @@ class RegisterHandler(webapp2.RequestHandler):
         # self.response.write(template.render())
         # """
 
+
+#This is the handler for the Run, Hide, Fight page
 class RHFHandler(webapp2.RequestHandler):
+    #the GET method returns the static RHF page
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('static/rhf.html')
         self.response.write(template.render())
 
+#This is the handler for the audio report page
 class ReportHandler(webapp2.RequestHandler):
+    #the GET method renders the Firebase credentials and displays the report page
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
         template = jinja_env.get_template('templates/report.html')
@@ -139,6 +149,7 @@ class ReportHandler(webapp2.RequestHandler):
 
         self.response.write(template.render(data))
 
+    #the POST method retrieves the user's input and sends another alert
     def post(self):
         #gets location of person making the report
         latitudeInput = self.request.get('latitudeInput')
@@ -210,15 +221,10 @@ class AboutLifeSaverHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('static/aboutLifeSaver.html')
         self.response.write(template.render())
 
-class TestHandler(webapp2.RequestHandler):
-    def get(self):
-        self.response.headers['Content-Type'] = 'text/plain'
-        # latitudeLongitude = [41.717713, -88.151134]
-        # # self.response.write(ExtraMethods.latLonToZIP(latitudeLongitude[0], latitudeLongitude[1]))
-        # self.response.write(ExtraMethods.latLonToAddress(latitudeLongitude[0], latitudeLongitude[1]))
-        self.response.write(ExtraMethods.getNearbyZipCodesJSON("60565", 5))
 
+#This allows us to display an email/text notification in the browswer
 class ReportNotificationHandler(webapp2.RequestHandler):
+    #The GET method takes queries from the URL and displays them in the web, adding audio controls
     def get(self):
         #https://stackoverflow.com/questions/5767678/appengine-get-parameters
         addressRAW = self.request.get("address")
@@ -249,6 +255,5 @@ app = webapp2.WSGIApplication([
     ('/report', ReportHandler),
     ('/creators', CreatorsHandler),
     ('/about', AboutLifeSaverHandler),
-    ('/test', TestHandler),
     ('/report_notification/', ReportNotificationHandler)
     ], debug=True)

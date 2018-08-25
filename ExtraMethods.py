@@ -58,6 +58,7 @@ def getPhoneNumberEmail(phoneNumber, phoneCarrier):
         return phoneNumber + "@" + phoneCarrierDictionary[phoneCarrier]
     return ""
 
+#converts latitude and longitude to ZIP
 #https://developers.google.com/maps/documentation/geocoding/intro
 def latLonToZIP(latitude, longitude):
     google_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&result_type=postal_code&key=%s" % (str(latitude), str(longitude), Keys.google_key)
@@ -71,6 +72,7 @@ def latLonToZIP(latitude, longitude):
     response = response["short_name"]
     return str(response)
 
+#converts latitude and longitude to address
 #https://developers.google.com/maps/documentation/geocoding/intro
 def latLonToAddress(latitude, longitude):
     google_url = "https://maps.googleapis.com/maps/api/geocode/json?latlng=%s,%s&result_type=street_address&key=%s" % (str(latitude), str(longitude), Keys.google_key)

@@ -1,5 +1,7 @@
 #EmailMain2 is the same as EmailMain except it fixes most/all of the errors!!
 
+#These are import statements for the modules needed:
+
 import ExtraMethods
 import logging
 #The commented lines below need to be discussed- they should work for now
@@ -23,7 +25,6 @@ from googleapiclient.discovery import build
 import oauth2client
 from oauth2client import file, client, tools
 
-
 try:
     import argparse
     flags = argparse.ArgumentParser(parents=[tools.argparser]).parse_args()
@@ -33,12 +34,15 @@ except:
     flags = None
 #this last statement was an attempt to fix a runtime error
 
+
+#This initializes some of the variables needed to use Gmail API
 SCOPES = 'https://mail.google.com/'
 CLIENT_SECRET_FILE = 'client_secret.json'
 APPLICATION_NAME = 'Gmail API Quickstart'
 
 
-
+#This reads the credentials from the read-only credentials.json file
+#and creates a credentials object using the JSON contents
 def get_credentials():
     """Gets valid user credentials from storage.
 
@@ -91,6 +95,8 @@ def get_credentials():
     #     print 'Storing credentials to ' + credential_path
     return credentials
 
+
+# more import statements for other Gmail api modules
 import base64
 from email.mime.audio import MIMEAudio
 from email.mime.base import MIMEBase
@@ -109,6 +115,8 @@ from googleapiclient.discovery import build
 credentials = get_credentials()
 service = build('gmail', 'v1', http=credentials.authorize(Http()))
 
+
+#This sends a message in plain text
 def SendMessage(service, user_id, message):
   """Send an email message.
 
@@ -130,6 +138,7 @@ def SendMessage(service, user_id, message):
     print 'An error occurred: %s' % error
 
 
+#This creates a message in plain text
 def CreateMessage(sender, to, subject, message_text):
   """Create a message for an email.
 
@@ -151,6 +160,7 @@ def CreateMessage(sender, to, subject, message_text):
   return {'raw': base64.b64encode(message.as_string()).replace('/','_').replace('+','-')}
 
 
+# This creates an HTML message
 # https://stackoverflow.com/questions/41403458/how-do-i-send-html-formatted-emails-through-the-gmail-api-for-python
 def CreateHTMLMessage(sender, to, subject, message_html):
   message = MIMEText(message_html, 'html')
@@ -161,7 +171,7 @@ def CreateHTMLMessage(sender, to, subject, message_html):
   #https://stackoverflow.com/questions/26663529/invalid-value-for-bytestring-error-when-calling-gmail-send-api-with-base64-encod
   return {'raw': base64.b64encode(message.as_string()).replace('/','_').replace('+','-')}
 
-
+# This sends a plain text email
 # Recipient, subject, and content should be passed in as strings
 def SendOneEmail(recipient, subject, content):
     # https://stackoverflow.com/questions/14698119/httpexception-deadline-exceeded-while-waiting-for-http-response-from-url-dead
@@ -175,6 +185,7 @@ def SendOneEmail(recipient, subject, content):
     # logging.info(testMessage)
     testSend = SendMessage(service, 'me', testMessage)
 
+# This sends an HTML email
 # Recipient, subject, and content should be passed in as strings
 def SendOneHTMLEmail(recipient, subject, content):
     # https://stackoverflow.com/questions/14698119/httpexception-deadline-exceeded-while-waiting-for-http-response-from-url-dead
@@ -188,7 +199,8 @@ def SendOneHTMLEmail(recipient, subject, content):
     # logging.info(testMessage)
     testSend = SendMessage(service, 'me', testMessage)
 
-# Will send an email to everybody with the specific zip code, using subject/content to draft the email
+
+# Will send an email to everybody with the specific HOME zip code, using subject/content to draft the email
 def sendAlertsHome(zipCode, subject, content):
     #queries once for home zip code
     q1 = Database.Subscriber.query(Database.Subscriber.home_zipcode == zipCode).fetch()
@@ -198,6 +210,7 @@ def sendAlertsHome(zipCode, subject, content):
     # q = q.filter(home_zipcode, zipCode)
     sendAlertsHelper(q1, subject, content)
 
+# Will send an email to everybody with the specific WORK zip code, using subject/content to draft the email
 def sendAlertsWork(zipCode, subject, content):
     #queries second time for work zip code
     q2 = Database.Subscriber.query(Database.Subscriber.work_zipcode == zipCode).fetch()
@@ -206,6 +219,7 @@ def sendAlertsWork(zipCode, subject, content):
     # q = Database.Subscriber.all()
     # q = q.filter(work_zipcode, zipCode)
     sendAlertsHelper(q2, subject, content)
+
 
 # Will send an email to everyone in the list of queries, using subject/content to draft the email
 def sendAlertsHelper(queries, subject, content):
@@ -219,8 +233,6 @@ def sendAlertsHelper(queries, subject, content):
             logging.info("sent message to " + userEmail)
             #SendOneEmail(userEmail, subject, content)
             SendOneHTMLEmail(userEmail, subject, content)
-
-
 
         if len(userPhone) > 0 and len(userCarrier) > 0:
             SendOneHTMLEmail(ExtraMethods.getPhoneNumberEmail(userPhone, userCarrier), subject, content)
