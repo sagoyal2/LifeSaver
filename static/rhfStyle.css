@@ -23,6 +23,7 @@ html {
 
 .card {
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  height: 900px;
 }
 
 .container {
@@ -61,7 +62,7 @@ p.header {
   text-align: center;
   font-size: 40px;
   font-weight: bold;
-  
+
 }
 #sent {
   color: #FFFFFF;
@@ -69,4 +70,14 @@ p.header {
   font-size: 20px;
   font-weight: bold;
   top: 100px;
+}
+
+.source{
+  padding: 0 8px;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+li{
+  font-size: 150%;
 }
