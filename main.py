@@ -179,23 +179,23 @@ class ReportHandler(webapp2.RequestHandler):
 
         logging.info("sent alerts!")
 
-        data = {
-            "fileName":fileName,
-            "filePath":filePath,
-            "fileURL":fileURL,
-            "details":details,
-            "address":address,
-            "zip":zip
-        }
+        # data = {
+        #     "fileName":fileName,
+        #     "filePath":filePath,
+        #     "fileURL":fileURL,
+        #     "details":details,
+        #     "address":address,
+        #     "zip":zip
+        # }
+        #
+        # self.response.headers['Content-Type'] = 'text/html'
+        # template = jinja_env.get_template('templates/report_test.html')
+        #
+        # self.response.write(template.render(data))
 
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('templates/report_test.html')
-
-        self.response.write(template.render(data))
-
-        # self.response.headers['Content-Type'] = 'text/html'
-        # template = jinja_env.get_template('static/rhf.html')
-        # self.response.write(template.render())
+        template = jinja_env.get_template('static/rhf.html')
+        self.response.write(template.render())
 
 
 class CreatorsHandler(webapp2.RequestHandler):
