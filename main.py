@@ -37,7 +37,7 @@ class MainHandler(webapp2.RequestHandler):
 
         #calls the EmailMain method to alert all users
         subject = "ALERT: SHOOTING IN YOUR %s AREA"
-        content = "AVOID '%s' AND FOLLOW THESE STEPS FOR SAFETY: <a href='https://www.life-saver-demo.appspot.com/RHF'>https://www.life-saver-demo.appspot.com/RHF</a>" % (address)
+        content = "AVOID '%s' AND FOLLOW THESE STEPS FOR SAFETY: <a href='www.life-saver-demo.appspot.com/RHF'>www.life-saver-demo.appspot.com/RHF</a>" % (address)
         html_content = "<html><head></head><body>%s</body></html>" % (content)
 
         searchRadius = 10 #10 miles
@@ -160,7 +160,7 @@ class ReportHandler(webapp2.RequestHandler):
 
         #calls the EmailMain method to alert all users
         subject = "ALERT: SHOOTING IN YOUR %s AREA"
-        content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY: <a href='https://www.life-saver-demo.appspot.com/RHF'>https://www.life-saver-demo.appspot.com/RHF</a>" % (address, details, fileURL)
+        content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY: <a href='www.life-saver-demo.appspot.com/RHF'>www.life-saver-demo.appspot.com/RHF</a>" % (address, details, fileURL)
         html_content = """<html><head></head><body>
                             <p>%s</p>
                             <div><a href="https://life-saver-demo.appspot.com/report_notification/?address=%s&details=%s&url=%s">View this alert online</a></div>
