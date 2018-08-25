@@ -204,10 +204,10 @@ class CreatorsHandler(webapp2.RequestHandler):
         template = jinja_env.get_template('static/creators.html')
         self.response.write(template.render())
 
-class AboutUsHandler(webapp2.RequestHandler):
+class AboutLifeSaverHandler(webapp2.RequestHandler):
     def get(self):
         self.response.headers['Content-Type'] = 'text/html'
-        template = jinja_env.get_template('static/aboutUs.html')
+        template = jinja_env.get_template('static/aboutLifeSaver.html')
         self.response.write(template.render())
 
 class TestHandler(webapp2.RequestHandler):
@@ -248,7 +248,7 @@ app = webapp2.WSGIApplication([
     ('/RHF', RHFHandler),
     ('/report', ReportHandler),
     ('/creators', CreatorsHandler),
-    ('/aboutUs', AboutUsHandler),
+    ('/about', AboutLifeSaverHandler),
     ('/test', TestHandler),
     ('/report_notification/', ReportNotificationHandler)
     ], debug=True)
