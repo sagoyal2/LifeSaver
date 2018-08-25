@@ -160,7 +160,7 @@ class ReportHandler(webapp2.RequestHandler):
 
         #calls the EmailMain method to alert all users
         subject = "ALERT: SHOOTING IN YOUR %s AREA"
-        content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
+        content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY: <a href='www.life-saver-demo.appspot.com/RHF'>www.life-saver-demo.appspot.com/RHF</a>" % (address, details, fileURL)
         html_content = """<html><head></head><body>
                             <p>%s</p>
                             <div><a href="https://life-saver-demo.appspot.com/report_notification/?address=%s&details=%s&url=%s">View this alert online</a></div>
@@ -229,7 +229,7 @@ class ReportNotificationHandler(webapp2.RequestHandler):
         details = detailsRAW.encode('ascii','ignore')
         fileURL = "https://firebasestorage.googleapis.com/v0/b/life-saver-demo.appspot.com/o/audio%2F" + fileURLRAW.encode('ascii','ignore').replace("*","&")
 
-        content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY" % (address, details, fileURL)
+        content = "AVOID '%s'. DETAILS FROM THE AREA INCLUDE THAT '%s'. AUDIO FROM THE AREA IS LINKED HERE '%s'. FOLLOW THESE STEPS FOR SAFETY: <a href='www.life-saver-demo.appspot.com/RHF'>www.life-saver-demo.appspot.com/RHF</a>" % (address, details, fileURL)
         html_content = """<html><head></head><body>
                             <p>%s</p>
                             <audio controls>
