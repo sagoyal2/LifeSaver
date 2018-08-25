@@ -166,7 +166,7 @@ def CreateHTMLMessage(sender, to, subject, message_html):
 def SendOneEmail(recipient, subject, content):
     # https://stackoverflow.com/questions/14698119/httpexception-deadline-exceeded-while-waiting-for-http-response-from-url-dead
     from google.appengine.api import urlfetch
-    urlfetch.set_default_fetch_deadline(45)
+    urlfetch.set_default_fetch_deadline(60)
 
     testMessage = CreateMessage('lifesaverprojectdemo@gmail.com', recipient, subject, content)
     logging.info(testMessage)
@@ -179,7 +179,7 @@ def SendOneEmail(recipient, subject, content):
 def SendOneHTMLEmail(recipient, subject, content):
     # https://stackoverflow.com/questions/14698119/httpexception-deadline-exceeded-while-waiting-for-http-response-from-url-dead
     from google.appengine.api import urlfetch
-    urlfetch.set_default_fetch_deadline(45)
+    urlfetch.set_default_fetch_deadline(60)
 
     testMessage = CreateHTMLMessage('lifesaverprojectdemo@gmail.com', recipient, subject, content)
     logging.info(testMessage)
